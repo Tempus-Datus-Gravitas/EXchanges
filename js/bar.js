@@ -1,4 +1,4 @@
-const header = document.querySelector('#header');
+const header = document.querySelector('header');
 let name = document.createElement('div');
 name.id = 'name';
 
@@ -15,7 +15,7 @@ name.appendChild(subtitle);
 
 let buscabar = document.createElement('input');
 buscabar.type = 'text';
-buscabar.placeholder = '&#xF002; Buscar';
+buscabar.placeholder = '  Buscar';
 
 let navega = document.createElement('ul');
 navega.id = 'navegacion';
@@ -27,9 +27,9 @@ i.className = 'fa-regular fa-circle-user';
 let active = document.querySelector('title');
 let items = [
     {nombre: 'Inicio', enlace: 'index.html'},
-    {nombre: 'Ofertas', enlace: 'ofertas.html'},
-    {nombre: 'Categorías &#xF0d7;', enlace: 'categorias.html'},
-    {nombre: 'Chats', enlace: 'chats.html'},
+    {nombre: 'Ofertas', enlace: ''},
+    {nombre: 'Categorías &#xF0d7;', enlace: ''},
+    {nombre: 'Chats', enlace: ''},
 ];
 
 for (let clave in items) {
