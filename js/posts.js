@@ -1,16 +1,26 @@
 let postsJSON = '{ "posts" : [' +
-'{ "id":"0001", "imagen":"img/1.png", "nombre":"Buzo de lana", "fullnombre":"Buzo de lana blanco usado talla L ancho 61 cm largo 74 cm manga 90 cm", "desc":"Descripciones epicas que en algun momento escribí sin un motivo muy exacto", "categoria":"Vestimenta" },' +
-'{ "id":"0002", "imagen":"img/2.png", "nombre":"Katana de acero", "fullnombre":"Katana de acero wwawawawaawwwaaw", "desc":"Descripciones epicas que en algun momento escribí sin un motivo muy exacto", "categoria":"Herramientas" }, '+ 
-'{ "id":"0003", "imagen":"img/3.png", "nombre":"Anillo de plata 925", "fullnombre":"Anillo de plata wwawawawaawwwaaw", "desc":"Descripciones epicas que en algun momento escribí sin un motivo muy exacto", "categoria":"Herramientas" }, ' +
-'{ "id":"0004", "imagen":"img/4.png", "nombre":"Anillo de plata 925", "fullnombre":"Anillo de plata wwawawawaawwwaaw", "desc":"Descripciones epicas que en algun momento escribí sin un motivo muy exacto", "categoria":"Herramientas" }, ' +
-'{ "id":"0005", "imagen":"img/5.png", "nombre":"Anillo de plata 925", "fullnombre":"Anillo de plata wwawawawaawwwaaw", "desc":"Descripciones epicas que en algun momento escribí sin un motivo muy exacto", "categoria":"Herramientas" } ]}';
+'{ "id":"0000", "imagen":"img/1.jpg", "nombre":"Buzo de lana blanco", "desc":"Usado talla L ancho 61 cm largo 74 cm manga 90 cm", "categoria":"Vestimenta" },' +
+
+'{ "id":"0001", "imagen":"img/2.jpg", "nombre":"Katana de acero", "desc":"Descripciones epicas que en algun momento escribí sin un motivo muy exacto", "categoria":"Herramientas" }, '+ 
+
+'{ "id":"0002", "imagen":"img/3.jpg", "nombre":"Anillo de plata 925", "desc":"Descripciones epicas que en algun momento escribí sin un motivo muy exacto", "categoria":"Accesorios" }, ' +
+
+'{ "id":"0003", "imagen":"img/4.jpg", "nombre":"Zapatillas Adidas", "desc":"Descripciones epicas que en algun momento escribí sin un motivo muy exacto", "categoria":"Vestimentas" }, ' +
+
+'{ "id":"0004", "imagen":"img/5.jpg", "nombre":"Kit de ollas de acero inóxidable", "desc":"Descripciones epicas que en algun momento escribí sin un motivo muy exacto", "categoria":"Herramientas" },' +
+
+'{ "id":"0005", "imagen":"img/6.jpg", "nombre":"Bufanda tejida a mano", "desc":"Descripciones epicas que en algun momento escribí sin un motivo muy exacto", "categoria":"Herramientas" },' +
+
+'{ "id":"0006", "imagen":"img/7.jpg", "nombre":"Kit de utensilios de cocina", "desc":"Una espatula, un ", "categoria":"Herramientas" },' +
+
+'{ "id":"0007", "imagen":"img/8.jpg", "nombre":"Camisa negra", "desc":"Una camisa negra muy fachera", "categoria":"Herramientas" } ]}';
 
 let posts = JSON.parse(postsJSON);
 console.log(posts);
 
 let cards = document.querySelector('#cards');
 
-for (let i = 0; i < posts.posts.length; i++) {
+for (let i = 0; i < 8; i++) {
 let card = document.createElement('div');
 card.className = "card";
 
