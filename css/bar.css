@@ -47,24 +47,25 @@ header{
 		gap: 20px;
 		margin-left: 20px;
 		.normal{
+			cursor: pointer;
 			text-decoration: none;
-			color: #fff;
+			color: #d9d9d9;
 			font-size: 20px;
 			transition: color 0.3s ease;
 			&:hover{
-				color: #6a6a6a;
+				color: #fff;
 			}
 		}
 		.active{
+			cursor: pointer;
 			text-decoration: none;
 			color: #fff;
 			font-size: 20px;
 			border-bottom: solid 2px #fff;
-			&:hover{
-				color: #6a6a6a;
-			}
+
 
 		}
+
 	}
 	.fa-circle-user{
 		font-size: 50px;
@@ -72,4 +73,7 @@ header{
 		margin: 15px;
 		cursor: pointer;
 	}
+
+
 }
+
