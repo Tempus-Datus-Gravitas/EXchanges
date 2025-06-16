@@ -1,19 +1,25 @@
 let postsJSON = '{ "posts" : [' +
-'{ "id":"0000", "imagen":"img/1.jpg", "nombre":"Buzo de lana blanco", "desc":"Usado talla L ancho 61 cm largo 74 cm manga 90 cm", "categoria":"Vestimenta" },' +
+'{ "id":0, "imagen":"img/1.jpg", "nombre":"Buzo de lana blanco", "desc":"Usado talla L ancho 61 cm largo 74 cm manga 90 cm", "categoria":"Vestimenta" },' +
 
-'{ "id":"0001", "imagen":"img/2.jpg", "nombre":"Katana de acero", "desc":"Descripciones epicas que en algun momento escribí sin un motivo muy exacto", "categoria":"Herramientas" }, '+ 
+'{ "id":1, "imagen":"img/2.jpg", "nombre":"Katana de acero", "desc":"Descripciones epicas que en algun momento escribí sin un motivo muy exacto", "categoria":"Herramientas" }, '+ 
 
-'{ "id":"0002", "imagen":"img/3.jpg", "nombre":"Anillo de plata 925", "desc":"Descripciones epicas que en algun momento escribí sin un motivo muy exacto", "categoria":"Accesorios" }, ' +
+'{ "id":2, "imagen":"img/3.jpg", "nombre":"Anillo de plata 925", "desc":"Descripciones epicas que en algun momento escribí sin un motivo muy exacto", "categoria":"Accesorios" }, ' +
 
-'{ "id":"0003", "imagen":"img/4.jpg", "nombre":"Zapatillas Adidas", "desc":"Descripciones epicas que en algun momento escribí sin un motivo muy exacto", "categoria":"Vestimentas" }, ' +
+'{ "id":3, "imagen":"img/4.jpg", "nombre":"Zapatillas Adidas", "desc":"Descripciones epicas que en algun momento escribí sin un motivo muy exacto", "categoria":"Vestimentas" }, ' +
 
-'{ "id":"0004", "imagen":"img/5.jpg", "nombre":"Kit de ollas de acero inóxidable", "desc":"Descripciones epicas que en algun momento escribí sin un motivo muy exacto", "categoria":"Herramientas" },' +
+'{ "id":4, "imagen":"img/5.jpg", "nombre":"Kit de ollas de acero inóxidable", "desc":"Descripciones epicas que en algun momento escribí sin un motivo muy exacto", "categoria":"Herramientas" },' +
 
-'{ "id":"0005", "imagen":"img/6.jpg", "nombre":"Bufanda tejida a mano", "desc":"Descripciones epicas que en algun momento escribí sin un motivo muy exacto", "categoria":"Herramientas" },' +
+'{ "id":5, "imagen":"img/6.jpg", "nombre":"Bufanda tejida a mano", "desc":"Descripciones epicas que en algun momento escribí sin un motivo muy exacto", "categoria":"Herramientas" },' +
 
-'{ "id":"0006", "imagen":"img/7.jpg", "nombre":"Kit de utensilios de cocina", "desc":"Una espatula, un ", "categoria":"Herramientas" },' +
+'{ "id":6, "imagen":"img/7.jpg", "nombre":"Kit de utensilios de cocina", "desc":"Una espatula, un ", "categoria":"Herramientas" },' +
 
-'{ "id":"0007", "imagen":"img/8.jpg", "nombre":"Camisa negra", "desc":"Una camisa negra muy fachera", "categoria":"Herramientas" } ]}';
+'{ "id":7, "imagen":"img/8.jpg", "nombre":"Camisa negra", "desc":"Una camisa negra muy fachera", "categoria":"Herramientas" },' +
+
+'{ "id":8, "imagen":"img/9.jpg", "nombre":"Renault", "desc":"Descripciones epicas que en algun momento escribí sin un motivo muy exacto", "categoria":"Accesorios" },' +
+
+'{ "id":9, "imagen":"img/10.jpg", "nombre":"Placa Base", "desc":"Descripciones epicas que en algun momento escribí sin un motivo muy exacto", "categoria":"Tecnología" },' +
+
+'{ "id":10, "imagen":"img/11.jpg", "nombre":"Peluche Makoto Yuki Persona 3 Reload", "desc":"Descripciones epicas que en algun momento escribí sin un motivo muy exacto", "categoria":"Fitness y deporte" }]}';
 
 let posts = JSON.parse(postsJSON);
 console.log(posts);
