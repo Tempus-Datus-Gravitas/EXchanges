@@ -21,27 +21,59 @@
                                   <h2>¿Ya tienes una cuenta?</h2>
 				  <p>Inicia sesión para obtener otra vez acceso a todos nuestros servicios.
 Volvé a permutar con otras personas. ¡Te están esperando!</p>
-				  <p class="nobtn" id="registrar">Registrame</p>
+				  <a href="login.html"><p class="nobtn" id="iniciar">Iniciar sesión</p></a>
 				</div>
 			</div>
-			<div id="register">
-			<h3>Iniciar sesión</h3>
+			<div id="signlog">
+			<h3>Registro</h3>
+			<div id="progressbar"></div>
+				<div class="textzone" style="margin: 0 0 0 80px;">
+					<p id="part"></p>
+					<p id="idea"></p>
+				</div>
 			<div id="inputs">
-				<div class="inputspace">
-					<p>Correo</p>
-					<input type="email" id="email" placeholder="">
+				<div class="part1">
+					<div class="inputspace">
+						<p>Nombre y Apellido</p>
+						<input type="text" id="name" placeholder="">
+					</div>
+					<div class="inputspace">
+						<p>Edad</p>
+						<input type="text" id="age" placeholder="">
+					</div>
+					<div class="inputspace">
+						<p>Nombre de usuario</p>
+						<input type="text" id="username" placeholder="">
+					</div>
+					<p class="nobtn" id="next">Siguiente</p>
+
 				</div>
-				<div class="inputspace">
-					<p>Contraseña</p>
-					<input type="password" id="password" placeholder="">
+				<div class="part2">
+
+					<div class="inputspace" class="part2">
+						<p>Correo</p>
+						<input type="email" id="email" placeholder="">
+					</div>
+					<div class="inputspace" class="part2">
+						<p>Contraseña</p>
+						<input type="password" id="password" placeholder="">
+					</div>
+					<div class="inputspace" class="part2">
+						<p>Repetir contraseña</p>
+						<input type="password" id="password2" placeholder="">
+					</div>
+						<p class="nobtn" id="registrarse">Registrarse</p>
 				</div>
 			</div>
-			<p class="nobtn" id="iniciar">Iniciar sesión</p>
+
+
 
 			</div>
 
 
 		</div>
 		<script src="js/signlog.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 	</body>
 </html>
