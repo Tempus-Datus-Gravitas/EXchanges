@@ -10,6 +10,7 @@ title.textContent = 'EX';
 let subtitle = document.createElement('h1');
 subtitle.id = 'subtitle';
 subtitle.textContent = 'changes';
+/* como harias para que el "changes" se quede siempre a la derecha de el "EX"?? */
 
 name.appendChild(title);
 name.appendChild(subtitle);
@@ -104,6 +105,4 @@ user.addEventListener('click', function() {
 	}
 
 });
-
-
 

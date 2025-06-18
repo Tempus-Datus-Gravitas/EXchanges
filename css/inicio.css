@@ -16,111 +16,161 @@ html{
 
 }
 body{
-	margin: 0;
-	padding: 0;
-	background: radial-gradient(ellipse at left top, #3c3c3c, #313131);
+    margin: 0;
+    padding: 0;
+    background: radial-gradient(ellipse at left top, #3c3c3c, #313131);
+    font-size: 1rem;
 }
 #container{
-	
-	display: flex;
-	flex-direction: column;
-	position: relative;
-	#sectiontitle{
-		margin: 20px;
-		font-size: 20px;
-		justify-content: start;
-	}
-	#cards{
-		display: flex;
-		flex-wrap: wrap;
-		gap: 30px;
-		margin: 20px;
-		width: calc(100% - 40px);
-		justify-content: center;
-		
-		.card{
-			border-radius: 15px;
-			width: 259px;
-			height: 380px;
-			background: #fff;
-			justify-content: center;
-			text-align: center;
-			.image{
-				margin: 20px auto;
-				justify-content: center;
-				width: 190px;
-				height: 190px;
-				border-radius: 0;
-				img{
-					width: 100%;
-					height: 100%;
-					object-fit: cover;
-				}
-			}
-			h2{
-				margin: 0 auto;
-				font-size: 20px;
-				color: #000;
-				overflow: hidden;
-			  	text-overflow: ellipsis;
-				max-width: 85%;
-				white-space: nowrap;
-			}
-			p{
-				color:#808080;
-			}
-			&:hover{
-				transform: scale(1.05);
-			}
-		}
-	}		
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    box-sizing: border-box;
 }
-	.listing{
-		animation: 0.2s ease-out 0s 1 slideInFromTop;
-		transition: all 0.3s ease;
-		background: #414141;
-		border-radius: 5px;
-		list-style: none;
-		position: absolute;
-		margin-top: -10px;
-		padding: 20px;
-		&.fromcategory{
-			font-size: 20px;
-			right: 180px;
-			li{
-				margin: 10px 0;
-			}
-		}
-		&.fromuser{
-			width: 250px;
-			font-size: 16px;
-			right: 10px;
-			li{
-				margin: 10px 0;
-			}
-			#userlogin{
-                 		display:flex;
-		 		flex-direction: row;
-				.fa-circle-user{
-				font-size:85px;
-				color:#2f2f2f;
-				margin-bottom: 20px;
-				}
-				a{
-					all: unset;
-					align-self: center;
-					margin-left: 20px;
-					:hover{
-						cursor: pointer;
-						border-bottom: solid 2px #fff;
-						transition: border-bottom 0.3s ease;
-						transform: scale(1.05);
-					}
-				}
-				
-			}
-		}
-	}
+#sectiontitle{
+    margin: 1.25rem 0;
+    font-size: 1.25rem;
+}
+#cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin: 1.25rem 0;
+    width: 100%;
+    justify-items: center;
+}
+.card {
+    border-radius: 1rem;
+    width: 100%;
+    max-width: 18rem;
+    background: #fff;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s;
+    min-width: 0;
+    height: auto;
+}
+.card .image {
+    margin: 1.25rem auto;
+    justify-content: center;
+    width: 12rem;
+    height: 12rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.card .image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.card h2 {
+    margin: 0 auto;
+    font-size: 1.25rem;
+    color: #000;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 85%;
+    white-space: nowrap;
+}
+.card p {
+    color: #808080;
+    font-size: 1rem;
+}
+.card:hover {
+    transform: scale(1.05);
+}
+.listing{
+    animation: 0.2s ease-out 0s 1 slideInFromTop;
+    transition: all 0.3s ease;
+    background: #414141;
+    border-radius: 0.3125rem;
+    list-style: none;
+    position: absolute;
+    margin-top: -0.625rem;
+    padding: 1.25rem;
+}
+.listing.fromcategory{
+    font-size: 1.25rem;
+    right: 12vw;
+}
+.listing.fromuser{
+    width: 15.625rem;
+    font-size: 1rem;
+    right: 0.625rem;
+}
+.listing li{
+    margin: 0.625rem 0;
+}
+#userlogin{
+    display:flex;
+    flex-direction: row;
+}
+#userlogin .fa-circle-user{
+    font-size:5.3125rem;
+    color:#2f2f2f;
+    margin-bottom: 1.25rem;
+}
+#userlogin a{
+    all: unset;
+    align-self: center;
+    margin-left: 1.25rem;
+}
+#userlogin a:hover{
+    cursor: pointer;
+    border-bottom: solid 2px #fff;
+    transition: border-bottom 0.3s ease;
+    transform: scale(1.05);
+}
+
+/* mediaaa cueris melhores */
+@media (max-width: 900px) {
+    #container {
+        padding: 1rem;
+    }
+    #cards {
+        gap: 1rem;
+    }
+    .card .image {
+        width: 10rem;
+        height: 10rem;
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        font-size: 0.95rem;
+    }
+    #container {
+        padding: 0.5rem;
+    }
+    #sectiontitle {
+        font-size: 1rem;
+    }
+    #cards {
+        gap: 0.5rem;
+        grid-template-columns: 1fr;
+    }
+    .card .image {
+        width: 8rem;
+        height: 8rem;
+    }
+    .listing.fromcategory,
+    .listing.fromuser {
+        right: 0.5rem;
+        font-size: 1rem;
+        width: 90vw;
+    }
+}
 
 
 
