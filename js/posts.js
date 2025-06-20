@@ -1,4 +1,4 @@
-let postsJSON = '{ "posts" : [' +
+let postsJSON = '[' +
 '{ "id":0, "imagen":"img/1.jpg", "nombre":"Buzo de lana blanco", "desc":"Usado talla L, ancho 61cm, largo 74cm, manga 90cm", "categoria":"Vestimenta" },' +
 
 '{ "id":1, "imagen":"img/2.jpg", "nombre":"Katana de acero", "desc":"Obra maestra de la forja. Cada detalle de esta katana, desde la empuñadura hasta la hoja, es un testimonio de la habilidad y dedicación del artesano.", "categoria":"Herramientas" }, '+ 
@@ -19,29 +19,30 @@ let postsJSON = '{ "posts" : [' +
 
 '{ "id":9, "imagen":"img/10.jpg", "nombre":"Placa Base", "desc":"Place base para computadora de escritorio. Es una Intel Desktop Board, tiene lo justo y necesario para el funcionamiento", "categoria":"Tecnología" },' +
 
-'{ "id":10, "imagen":"img/11.jpg", "nombre":"Peluche Makoto Yuki Persona 3 Reload", "desc":"El mejor protagonista (debatible) de la famosa saga de videojuegos japonesa Persona, llegó como peluche para quedarse. Aprovecha la oportunidad de tener este tierno peluche de 15cm para llevarlo a dónde quieras y llorarle en las noches", "categoria":"Fitness y deporte" }]}';
+'{ "id":10, "imagen":"img/11.jpg", "nombre":"Peluche Makoto Yuki Persona 3 Reload", "desc":"El mejor protagonista (debatible) de la famosa saga de videojuegos japonesa Persona, llegó como peluche para quedarse. Aprovecha la oportunidad de tener este tierno peluche de 15cm para llevarlo a dónde quieras y llorarle en las noches", "categoria":"Fitness y deporte" }]';
 
 let posts = JSON.parse(postsJSON);
 console.log(posts);
 
+
 let cards = document.querySelector('#cards');
 
-for (let i = 0; i < 8; i++) {
-let card = document.createElement('div');
-card.className = "card";
+for (let i = posts.length-1 ; i > 2; i--) {
+	let card = document.createElement('div');
+	card.className = "card";
 
-let imgen = document.createElement('div');
-imgen.className= "image";
-	let img = document.createElement('img');
-	img.src = posts.posts[i].imagen;
-	imgen.appendChild(img);
+	let imgen = document.createElement('div');
+	imgen.className= "image";
+		let img = document.createElement('img');
+		img.src = posts[i].imagen;
+		imgen.appendChild(img);
 
-let h2 = document.createElement('h2');
-	h2.textContent = posts.posts[i].nombre;
-let p = document.createElement('p');
-	p.textContent = posts.posts[i].desc;
-card.appendChild(imgen);
-card.appendChild(h2);
-card.appendChild(p);
-cards.appendChild(card);
+	let h2 = document.createElement('h2');
+		h2.textContent = posts[i].nombre;
+	let p = document.createElement('p');
+		p.textContent = posts[i].desc;
+	card.appendChild(imgen);
+	card.appendChild(h2);
+	card.appendChild(p);
+	cards.appendChild(card);
 }
