@@ -13,15 +13,14 @@ color: #fff;
 }
 html{
 	background: #363636;
-
+	background: radial-gradient(ellipse at left top, #3c3c3c, #313131);
+	height: 100%;
 }
 body{
 	margin: 0;
 	padding: 0;
-	background: radial-gradient(ellipse at left top, #3c3c3c, #313131);
 }
-#container{
-	
+#container{	
 	display: flex;
 	flex-direction: column;
 	position: relative;
@@ -68,6 +67,11 @@ body{
 			}
 			p{
 				color:#808080;
+				margin: 10px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				max-width: 100%;
+				max-height: 100px;
 			}
 			&:hover{
 				transform: scale(1.05);
