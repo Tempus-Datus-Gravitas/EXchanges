@@ -24,7 +24,16 @@ let postsJSON = '[' +
 '{ "id":12, "imagen":"img/13.jpg", "nombre":"Peluche espurr", "desc":"Un peluche de espurr", "categoria":"Entretenimiento" },'+
 '{ "id":14, "imagen":"img/15.jpg", "nombre":"Peluche prigatito","desc": "Un peluche de prigatito", "categoria":"Entretenimiento" },'+
 '{ "id":15, "imagen":"img/16.jpg", "nombre":"Peluche clodsire", "desc":"Un peluche de clodsire", "categoria":"Entretenimiento"  },'+
-'{ "id":15, "imagen":"img/16.jpg", "nombre":"Peluche meowstick", "desc":"Un peluche de meowstick", "categoria":"Entretenimiento" }]';
+'{ "id":15, "imagen":"img/16.jpg", "nombre":"Peluche meowstick", "desc":"Un peluche de meowstick", "categoria":"Entretenimiento" },'+
+'{ "id":16, "imagen":"img/17.jpg", "nombre":"Pala", "desc":"es una herramienta que consta de una hoja o lámina unida a un mango o asta. La hoja suele ser de metal, como acero, y puede tener diferentes formas, como rectangular, redonda o puntiaguda, según su función.", "categoria":"Herramientas" },' +
+
+'{ "id":17, "imagen":"img/18.jpg", "nombre":"Martillo", "desc":"herramienta manual utilizada para golpear, clavar, romper o deformar objetos.", "categoria":"Herramientas" }, '+ 
+
+'{ "id":18, "imagen":"img/19.jpg", "nombre":"Taladro", "desc":"herramienta eléctrica, comúnmente con forma de pistola, que se utiliza para hacer agujeros en diversos materiales", "categoria":"Herramientas" }, ' +
+
+'{ "id":19, "imagen":"img/20.jpg", "nombre":"Pico", "desc":"herramienta manual utilizada para romper materiales duros como rocas, tierra compactada o asfalto", "categoria":"Herramientas" }, ' +
+
+'{ "id":20, "imagen":"img/21.jpg", "nombre":"Rastrillo", "desc":"Un rastrillo es una herramienta con una cabeza rectangular o semicircular con dientes, unida a un mango largo, utilizada para limpiar, nivelar y airear el suelo, así como para recoger hojas, hierba cortada y otros desechos.", "categoria":"Herramientas" }]';
 let posts = JSON.parse(postsJSON);
 console.log(posts);
 
