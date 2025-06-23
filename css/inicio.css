@@ -127,4 +127,41 @@ body{
 	}
 
 
+@media (max-width: 900px) {
+    #container {
+        padding: 1rem;
+    }
+    #cards {
+        gap: 1rem;
+    }
+    .card .image {
+        width: 10rem;
+        height: 10rem;
+    }
+}
 
+@media (max-width: 600px) {
+    body {
+        font-size: 0.95rem;
+    }
+    #container {
+        padding: 0.5rem;
+    }
+    #sectiontitle {
+        font-size: 1rem;
+    }
+    #cards {
+        gap: 0.5rem;
+        grid-template-columns: 1fr;
+    }
+    .card .image {
+        width: 8rem;
+        height: 8rem;
+    }
+    .listing.fromcategory,
+    .listing.fromuser {
+        right: 0.5rem;
+        font-size: 1rem;
+        width: 90vw;
+    }
+}
