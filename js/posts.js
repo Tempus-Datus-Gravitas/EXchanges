@@ -25,8 +25,7 @@ console.log(posts);
 
 
 let cards = document.querySelector('#cards');
-let l8=(posts.length)-8;
-for (let i = posts.length; i >= l8 ; i--) {
+for (let i = posts.length; i >= (posts.length)-8; i--) {
 	let card = document.createElement('div');
 	card.className = "card";
 
