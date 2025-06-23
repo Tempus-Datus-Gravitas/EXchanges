@@ -22,8 +22,8 @@ let postsJSON = '[' +
 '{ "id":10, "imagen":"img/11.jpg", "nombre":"Peluche Makoto Yuki Persona 3 Reload", "desc":"El mejor protagonista (debatible) de la famosa saga de videojuegos japonesa Persona, llegó como peluche para quedarse. Aprovecha la oportunidad de tener este tierno peluche de 15cm para llevarlo a dónde quieras y llorarle en las noches", "categoria":"Fitness y deporte" },'+
 '{"id":11, "imagen":"img/12.jpg", "nombre":"Peluche Meowscrada", "desc":"Un peluche de meowscarada", "categoria":"Entretenimiento" },'+
 '{ "id":12, "imagen":"img/13.jpg", "nombre":"Peluche espurr", "desc":"Un peluche de espurr", "categoria":"Entretenimiento" },'+
-'{ "id":14, "imagen":"img/15.jpg", "nombre":"Peluche prigatito","desc": "Un peluche de prigatito", "categoria":"Entretenimiento" },'+
-'{ "id":15, "imagen":"img/16.jpg", "nombre":"Peluche clodsire", "desc":"Un peluche de clodsire", "categoria":"Entretenimiento"  },'+
+'{ "id":14, "imagen":"img/14.jpg", "nombre":"Peluche prigatito","desc": "Un peluche de prigatito", "categoria":"Entretenimiento" },'+
+'{ "id":15, "imagen":"img/15.jpg", "nombre":"Peluche clodsire", "desc":"Un peluche de clodsire", "categoria":"Entretenimiento"  },'+
 '{ "id":15, "imagen":"img/16.jpg", "nombre":"Peluche meowstick", "desc":"Un peluche de meowstick", "categoria":"Entretenimiento" },'+
 '{ "id":16, "imagen":"img/17.jpg", "nombre":"Pala", "desc":"es una herramienta que consta de una hoja o lámina unida a un mango o asta. La hoja suele ser de metal, como acero, y puede tener diferentes formas, como rectangular, redonda o puntiaguda, según su función.", "categoria":"Herramientas" },' +
 
