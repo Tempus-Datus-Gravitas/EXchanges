@@ -13,6 +13,7 @@ Welcome to the **EXchange ** website! This project offers an efficient and relia
 | 🐧 Linux (Ubuntu/Debian)| ✅ Full       |
 | 🎮 Steam Deck           | ✅ Full       |
 | 💻 Laptop/Desktop       | ✅ Full       |
+| 📱 Android              | ✅ Full       |
 
 ---
 
