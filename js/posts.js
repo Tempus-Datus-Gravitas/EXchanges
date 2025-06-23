@@ -20,7 +20,7 @@ let postsJSON = '[' +
 '{ "id":9, "imagen":"img/10.jpg", "nombre":"Placa Base", "desc":"Place base para computadora de escritorio. Es una Intel Desktop Board, tiene lo justo y necesario para el funcionamiento", "categoria":"Tecnología" },' +
 
 '{ "id":10, "imagen":"img/11.jpg", "nombre":"Peluche Makoto Yuki Persona 3 Reload", "desc":"El mejor protagonista (debatible) de la famosa saga de videojuegos japonesa Persona, llegó como peluche para quedarse. Aprovecha la oportunidad de tener este tierno peluche de 15cm para llevarlo a dónde quieras y llorarle en las noches", "categoria":"Fitness y deporte" },'+
-"id":11, "imagen":"img/12.jpg", "nombre":"Peluche Meowscrada", "desc":"Un peluche de meowscarada", "categoria":"Entretenimiento" },'+
+'{"id":11, "imagen":"img/12.jpg", "nombre":"Peluche Meowscrada", "desc":"Un peluche de meowscarada", "categoria":"Entretenimiento" },'+
 '{ "id":12, "imagen":"img/13.jpg", "nombre":"Peluche espurr", "desc":"Un peluche de espurr", "categoria":"Entretenimiento" },'+
 '{ "id":14, "imagen":"img/15.jpg", "nombre":"Peluche prigatito","desc": "Un peluche de prigatito", "categoria":"Entretenimiento" },'+
 '{ "id":15, "imagen":"img/16.jpg", "nombre":"Peluche clodsire", "desc":"Un peluche de clodsire", "categoria":"Entretenimiento"  },'+
