@@ -163,5 +163,18 @@ body{
         right: 0.5rem;
         font-size: 1rem;
         width: 90vw;
+	#userlogin{
+	  .fa-circle-user {
+	    position: relative;
+	    font-size: 85px;
+	    margin: 15px;
+	    cursor: pointer;
+	  }
+	}
+     }
+    .listing.fromburger {
+	width: 80vw;
+	align-self: end;
+	font-size: 1rem;
     }
 }
