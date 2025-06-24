@@ -81,8 +81,7 @@ arrow.addEventListener('click', function() {
 		let categorymenu2 = document.querySelector('.fromcategory');
           	categorymenu2.remove();
 	    	state = 'inactive';
-	}
-});
+	}});
 
 let userstatus = "inactive";
 let user = document.querySelector('.fa-circle-user');
@@ -92,6 +91,11 @@ user.addEventListener('click', function() {
 		let categorymenu2 = document.querySelector('.fromcategory');
 		categorymenu2.remove();
 		state = 'inactive';
+	    }
+	    if (burgerstatus === 'active') {
+		let navmenu = document.querySelector('.fromburger');
+		navmenu.remove();
+		burgerstatus = 'inactive';
 	    }
 	    let usermenu = document.createElement('ul');
 	    usermenu.classList.add('listing');
@@ -114,5 +118,61 @@ user.addEventListener('click', function() {
 	    usercollapse2.remove();
 	    userstatus = "inactive";
 	}
-
 });
+
+// Create the burger to put in the corner of the header
+let burger = document.createElement('p');
+burger.id = 'burger';
+burger.textContent = '☰';
+let burgerstatus = 'inactive';
+burger.addEventListener('click', function() {
+   if (userstatus === 'active') {
+	let usercollapse2 = document.querySelector('.fromuser');
+	usercollapse2.remove();
+	userstatus = 'inactive';
+    }else if (burgerstatus === 'active') {
+	let navmenu = document.querySelector('.fromburger');
+	navmenu.remove();
+	burgerstatus = 'inactive';
+    }else if (burgerstatus === 'inactive') {
+		    let navmenu = document.createElement('ul');
+		    navmenu.classList.add('listing');
+		    navmenu.classList.add('fromburger');
+		    navmenu.innerHTML = `
+			<li><a href="index.html">Inicio</a></li>
+			<li><a>Ofertas</a></li>
+			<li><a>Categorías</a><p style="display:inline" class="arrow"></p>
+				<ul class="fromarrow"><li><a>Vestimenta</a></li>
+				<li><a>Herramientas</a></li>
+				<li><a>Accesorios</a></li>
+				<li><a>Vestimentas</a></li>
+				<li><a>Cocina</a></li>
+				<li><a>Accesorios</a></li>
+				<li><a>Herramientas</a></li>
+				<li><a>Tecnología</a></li>
+				<li><a>Fitness y deporte</a></li>
+				<li><a>Belleza</a></li>
+				<li><a>Entretenimiento</a></li>
+				<li><a>Hogar y muebles</a></li></ul>
+			</li>
+			<li><a>Chats</a></li>
+		    `;
+	    	    container.appendChild(navmenu);
+	    	    let fromarrow = document.querySelector('.fromarrow');
+		    fromarrow.style.display = 'none';
+	    	    let arrow = document.querySelector('.arrow');
+	            arrow.style.cursor = 'pointer';
+	            arrow.addEventListener('click', function() {
+		        if (fromarrow.style.display === 'none') {
+			fromarrow.style.display = 'block';
+		        arrow.textContent = '';
+			}else {
+			fromarrow.style.display = 'none';
+			arrow.textContent = '';
+		        }
+		    });
+		    burgerstatus = 'active';
+		}
+});
+header.appendChild(burger);
+
