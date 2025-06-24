@@ -29,7 +29,7 @@ let active = document.querySelector('title');
 let items = [
     {nombre: 'Inicio', enlace: 'index.html'},
     {nombre: 'Ofertas', enlace: ''},
-    {nombre: 'Categorías &#xF0d7;', enlace: ''},
+    {nombre: 'Categorías', enlace: ''},
     {nombre: 'Chats', enlace: ''},
 ];
 
@@ -37,10 +37,10 @@ for (let clave in items) {
     let li = document.createElement('li');
     if (items[clave].nombre === active.textContent) {
 	li.innerHTML = `<a class="active" href="${items[clave].enlace}">${items[clave].nombre}</a>`;
-   }else if (items[clave].nombre == 'Categorías &#xF0d7;') {
-    	li.innerHTML = `<a class="normal" id="categories">${items[clave].nombre}</a>`;
+   }else if (items[clave].nombre == 'Categorías') {
+    	li.innerHTML = `<a class="normal" id="categories" onclick="alert('Aún no implementado')">${items[clave].nombre}</a><p id="arrow"></p>`;
    }else {
-    	li.innerHTML = `<a class="normal" href="${items[clave].enlace}" onclick="alert('Aún no implementado')">${items[clave].nombre}</a>`;
+    	li.innerHTML = `<a class="normal" onclick="alert('Aún no implementado')">${items[clave].nombre}</a>`;
     }
     navega.appendChild(li);
 }
@@ -49,8 +49,14 @@ header.appendChild(buscabar);
 header.appendChild(navega);
 header.appendChild(i);
 let state='inactive';
-categories.addEventListener('click', function() {
+arrow.addEventListener('click', function() {
 	if (state === 'inactive') {
+		if (userstatus === 'active') {
+			let usercollapse2 = document.querySelector('.fromuser');
+			usercollapse2.remove();
+			userstatus = 'inactive';
+		}
+		arrow.textContent = '';
 		let categorymenu = document.createElement('ul');
 		categorymenu.classList.add('listing');
 		categorymenu.classList.add('fromcategory');
@@ -71,6 +77,7 @@ categories.addEventListener('click', function() {
 		container.appendChild(categorymenu);
 		state = 'active';
 	}else if (state === 'active') {
+		arrow.textContent = '';
 		let categorymenu2 = document.querySelector('.fromcategory');
           	categorymenu2.remove();
 	    	state = 'inactive';
@@ -81,6 +88,11 @@ let userstatus = "inactive";
 let user = document.querySelector('.fa-circle-user');
 user.addEventListener('click', function() {
         if (userstatus === "inactive") {
+	    if (state === 'active') {
+		let categorymenu2 = document.querySelector('.fromcategory');
+		categorymenu2.remove();
+		state = 'inactive';
+	    }
 	    let usermenu = document.createElement('ul');
 	    usermenu.classList.add('listing');
 	    usermenu.classList.add('fromuser');
@@ -104,6 +116,3 @@ user.addEventListener('click', function() {
 	}
 
 });
-
-
-
