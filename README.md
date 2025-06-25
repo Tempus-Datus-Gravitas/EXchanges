@@ -1,44 +1,43 @@
 # 🧭 EXchange
 
-Welcome to the **EXchange ** website! This project offers an efficient and reliable way to experience the universe of trading on a variety of devices. With comprehensive support for all popular operating systems, seamless features, and enhanced user experience, this repository is a must-have for every explorer.
+¡Bienvenido al sitio web de **EXchange**! Este proyecto ofrece una forma eficiente y confiable de experimentar en el universo de la permutación en una variedad de dispositivos. Con un soporte integral para todos los sistemas operativos populares, características fluidas y una experiencia de usuario mejorada, este repositorio es imprescindible para cada explorador.
 
 ---
 
-## 🖥️ OS Compatibility Table
+## 🖥️ OS Tabla de Compatibilidad
 
-| Operating System         | Compatibility |
+| Sistema Operativo         | Compatibilidad |
 |--------------------------|----------------|
-| 🪟 Windows 10/11        | ✅ Full       |
-| 🍏 macOS (Intel & ARM)  | ✅ Full       |
-| 🐧 Linux (Ubuntu/Debian)| ✅ Full       |
-| 🎮 Steam Deck           | ✅ Full       |
-| 💻 Laptop/Desktop       | ✅ Full       |
-| 📱 Android              | ✅ Full       |
+| 🪟 Windows 10/11        | ✅ Total     |
+| 🍏 macOS (Intel & ARM)  | ✅ Total      |
+| 🐧 Linux (Ubuntu/Debian)| ✅ Total      |
+| 🎮 Steam Deck           | ✅ Total      |
+| 💻 Laptop/Desktop       | ✅ Total       |
+| 📱 Android              | ✅ Total       |
 
 ---
 
-## ✨ Feature List
+## ✨Lista de funciones
 
-- Easy one-click for instant view  
-- Regular updates for stability and new features  
-- Network optimization for smoother online use   
-- Advanced security – no patches or risky modifications required  
-- Seamless integration with your preferred controller or keyboard
-
----
-
-## 📥 Usage
-
-  Start entering the following link: [tempus-datus-gravitas.github.io/EXchanges/index.html](https://tempus-datus-gravitas.github.io/EXchanges/index.html)
+-Vista instantánea con un solo clic
+-Actualizaciones regulares para mayor estabilidad y nuevas funciones
+-Optimización de red para un uso en línea más fluido
+-Seguridad avanzada: sin necesidad de parches ni modificaciones arriesgadas
+-Integración perfecta con tu controlador o teclado preferido
 
 ---
 
-## ⚠️ Disclaimer
+## 📥 Para ingresar
 
-This repository is for **educational and preservation purposes only**. We are not affiliated with anyone. Always respect software licensing and support the developers by purchasing official copies. Use at your own responsibility.
+  Empieza a ingresar en el siguiente enlace: [tempus-datus-gravitas.github.io/EXchanges/index.html](https://tempus-datus-gravitas.github.io/EXchanges/index.html)
 
 ---
 
-## 📄 MIT License
+## ⚠️ Descarga de responsabilidad
 
-This project is licensed under the [MIT License](https://opensource.org/licenses/MIT). See LICENSE file for full details.
+Este repositorio es solo para **educational and preservation purposes only**. No estamos afiliados a nadie. Siempre respeta las licencias de software y apoya a los desarrolladores comprando copias oficiales. Usa bajo tu propia responsabilidad.
+---
+
+## 📄 MIT licencia
+
+Este proyecto está licenciado bajo el [MIT License](https://opensource.org/licenses/MIT). Vea el archivo LICENSE para obtener todos los detalles.
