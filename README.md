@@ -29,7 +29,7 @@ Welcome to the **EXchange ** website! This project offers an efficient and relia
 
 ## 📥 Usage
 
-  Start entering the following link: [tempus-datus-gravitas.github.io/EXchanges/index.html](tempus-datus-gravitas.github.io/EXchanges/index.html)
+  Start entering the following link: [tempus-datus-gravitas.github.io/EXchanges/index.html](https://tempus-datus-gravitas.github.io/EXchanges/index.html)
 
 ---
 
