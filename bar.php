@@ -19,7 +19,7 @@
 		<li><a><i class="fa-solid fa-basketball"></i>Fitness y deporte</a></li>
 		<li><a><i class="fa-solid fa-brush"></i>Belleza</a></li>
 		<li><a><i class="fa-solid fa-dumbbell"></i>Entretenimiento</a></li>
-		<li><a>Hogar y muebles</a></li>
+		<li><a><i class="fa-solid fa-couch"></i>Hogar y muebles</a></li>
 	</ul>
 	<i id="usercircle" class="fa-regular fa-user-circle"></i>
 	<ul class="listing fromuser">
