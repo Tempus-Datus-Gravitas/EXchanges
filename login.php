@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="icon" href="img/logo.png">
+		<link rel="stylesheet" href="css/signlog.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+		<link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+		<link href='https://fonts.googleapis.com/css?family=Expletus Sans' rel='stylesheet'>
+		<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+		<title>Inicio de sesión</title>
+	</head>
+	<body> 
+		<div id="container">
+			<i id="goback" class="fas fa-arrow-left" onclick="location.href='index.php'"></i>
+			<div class=name onclick="location.href='index.php'">
+				<p id="title">EX</p>
+				<p id="subtitle">changes</p>
+			</div>
+
+			<div id="welcome">
+				<div id="info">
+                                  <h2>¿No tienes una cuenta?</h2>
+				  <p>Registrate para obtener acceso a todos nuestros servicios.
+Comienza a permutar con otras personas. ¡Es gratis!</p>
+				  <a href="register.php"><p class="nobtn" id="registrar">Registrame</p></a>
+				</div>
+			</div>
+			<div id="signlog">
+			<h3>Iniciar sesión</h3>
+			<div id="inputs">
+				<div class="inputspace">
+					<p>Correo</p>
+					<input type="email" id="email" placeholder="">
+				</div>
+				<div class="inputspace">
+					<p>Contraseña</p>
+					<input type="password" id="password" placeholder="">
+				</div>
+			<p class="nobtn" id="login">Iniciar sesión</p>
+			</div>
+
+			</div>
+
+
+		</div>
+		<script src="lib/jquery-3.7.1.min.js.js"></script>
+		<script src="js/signlog.js"></script>
+	</body>
+</html>
