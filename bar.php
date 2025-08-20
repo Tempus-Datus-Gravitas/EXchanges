@@ -17,8 +17,8 @@
 		<li><a><i class="fa-solid fa-spoon"></i>Cocina</a></li>
 		<li><a><i class="fa-solid fa-laptop"></i>Tecnología</a></li>
 		<li><a><i class="fa-solid fa-basketball"></i>Fitness y deporte</a></li>
-		<li><a><i class="fa-solid fa-laptop"></i>Belleza</a></li>
-		<li><a>Entretenimiento</a></li>
+		<li><a><i class="fa-solid fa-brush"></i>Belleza</a></li>
+		<li><a><i class="fa-solid fa-dumbbell"></i>Entretenimiento</a></li>
 		<li><a>Hogar y muebles</a></li>
 	</ul>
 	<i id="usercircle" class="fa-regular fa-user-circle"></i>
