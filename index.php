@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="UTF-8">
 		<link rel="icon" href="img/logo.png">
 		<link rel="stylesheet" href="css/inicio.css">
 		<link rel="stylesheet" href="css/bar.css">
@@ -11,17 +12,43 @@
 		<title>Inicio</title>
 	</head>
 	<body> 
-		<?php include 'bar.php'; ?>
+		<?php 
+			header('Content-Type: text/html; charset=UTF-8');
+			include 'bar.php';
+		?>
 		<div id="container">
 				<div id="sectiontitle">
 				<p>Publicados recientemente</p>
+				</div>
+			<div id="cards">
+				<?php 
+					require_once 'conexion.php';
+					$query = "SELECT * FROM posts ORDER BY created_at DESC LIMIT 8";
+					$result = mysqli_query($conn, $query);
+					$json = array();
+					if ($result) {
+						while ($row = mysqli_fetch_assoc($result)) {
+							$json[] = array(
+								'photo' => $row['photo'],
+								'name' => $row['name'],
+								'description' => $row['description']
+							);
+							echo '<div class="card">
+								<div class="image">
+									<img src="data:image/jpeg;base64,'.base64_encode($row['photo']).'" alt="Imagen del producto">
+								</div>
+									<h2>'.$row['name'].'</h2>
+									<p>'.$row['description'].'</p>
+								</div>';
+						}
+					}else{
+						echo "<p style=text-align:center>No hay publicaciones</p>";
+					}
+				?>
 			</div>
-			<div id="cards"></div>
 		</div>
 		<script src="lib/jquery-3.7.1.min.js.js"></script>
 		<script src="js/posts.js"></script>
-		<?php
-			header('Content-Type: text/html; charset=UTF-8')
-		?>
+
 	</body>
 </html>
