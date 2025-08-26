@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 let postsJSON = '[' +
 '{ "id":0, "imagen":"img/1.jpg", "nombre":"Buzo de lana blanco", "desc":"Usado talla L, ancho 61cm, largo 74cm, manga 90cm", "categoria":"Vestimenta" },' +
 '{ "id":1, "imagen":"img/2.jpg", "nombre":"Katana de acero", "desc":"Obra maestra de la forja. Cada detalle de esta katana, desde la empuñadura hasta la hoja, es un testimonio de la habilidad y dedicación del artesano.", "categoria":"Herramientas" }, '+ 
@@ -51,3 +52,6 @@ for (let i = posts.length-1; i >= posts.length-8; i--) {
 	card.appendChild(p);
 	cards.appendChild(card);
 }
+=======
+
+>>>>>>> francciscobranch
