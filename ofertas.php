@@ -1,5 +1,6 @@
 <?php
 header('Content-Type: text/html; charset=UTF-8');
+require_once 'conexion.php';
 $ofertas = [
    "Vestimenta" => [
 	   ["titulo" => "Buzo de lana", "img" => "img/1.jpg"],

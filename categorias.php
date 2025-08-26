@@ -1,6 +1,7 @@
 
 <?php
 header('Content-Type: text/html; charset=UTF-8');
+require_once 'conexion.php';
 $ofertas = [
    "Vestimenta" => [
 	   ["titulo" => "Buzo de lana", "img" => "img/1.jpg", "desc" => "Buzo de lana blanco, usado talla L. Muy abrigado y cómodo para el invierno."],

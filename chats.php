@@ -2,6 +2,7 @@
 
 <?php
 header('Content-Type: text/html; charset=UTF-8');
+require_once 'conexion.php';
 $chats = [
 	["nombre" => "FacuPermutaciones", "mensaje" => "¿Dónde quedamos?", "img" => "img/perfil1.jpg"],
 	["nombre" => "SansTradeos", "mensaje" => "Sobre las crocs que...", "img" => "img/perfil2.jpg"],
