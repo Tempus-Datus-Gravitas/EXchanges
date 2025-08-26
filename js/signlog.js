@@ -1,21 +1,3 @@
-// --------------------
-//  Logalstorage cosas
-// --------------------
-
-// Función para obtener los usuarios desde localStorage o desde un JSON de ejemplo si no existen.
-function getusers() {
-	if (localStorage.getItem('usuarios')) {
-		let usuarios = JSON.parse(localStorage.getItem('usuarios')); // Obtiene el array de usuarios desde localStorage si existe dentro de este.
-	}else {
-		// Si no hay usuarios en localStorage, se usa el JSON de ejemplo
-		let usuariosJSON = '{ "usuarios":['+
-		'{"id":1,"nombreapellido":"default","apellido":"default","email":"email@d.com","psswd":"default", "edad":"18"},'+
-		'{"id":2,"nombreapellido":"Juan Pérez","email":"ks@gmail.com","psswd":"123456", "edad":"25"}]}';
-
-		let usuarios = JSON.parse(usuariosJSON).usuarios; // Se define usuarios como el pasaje desde JSON a objeto.
-		localStorage.setItem('usuarios', JSON.stringify({ usuarios: usuarios })); // Se guarda el array de usuarios en localStorage.
-	}
-}
 let page = document.querySelector('title').textContent; // define la página actual
 actualpage(page); // Llama a la función actualpage con el nombre de la página actual.
 
@@ -40,31 +22,20 @@ function iniciodesesion(){
 		$(this).on('keyup', function(event) {
 			if (event.key === 'Enter') {
 				if (index < inputspace.length - 1) {
-					inputspace[index + 1].focus(); // Enfoca el siguiente input.
+					inputspace[index + 1].focus();
 				} else {
-					login.click(); // Si es el último input, simula un clic en el botón de login.
+					login.click(); 
 				}
 			}
 		});
 	});	
 
 	login.addEventListener('click', function() {
-		for (let i = 0; i < usuarios.length; i++) {
-			if (email.value === "" || password.value === "") {
-				alert("Por favor, completa todos los campos.");
-				event.preventDefault();
-			}else if (usuarios[i].email === email.value && usuarios[i].psswd === password.value) {
-				window.location.href = "index.php";
-				event.preventDefault();
-			}else if (usuarios[i].email === email.value && usuarios[i].psswd !== password.value) { 
-				alert("Contraseña incorrecta. Por favor, inténtalo de nuevo.");
-				event.preventDefault();
-			}else if (usuarios[i].email !== email.value && i === usuarios.length - 1) {
-				alert("Usuario no encontrado. Por favor, verifica tu email.");
-				event.preventDefault();
-			}else {
-				window.location.href = "index.php"; // Si el usuario es encontrado, redirige a index.php.
-			}
+		if (email.value === "" || password.value === "") {
+			alert("Por favor, completa todos los campos.");
+			event.preventDefault();
+		}else{
+			$('#submit').click(); // Submit es el botonsito oculto que envía el formulario para todo eso de la base de datos.
 		}
 	});
 }
@@ -137,16 +108,7 @@ function registro() {
 			alert("Las contraseñas no coinciden. Por favor, inténtalo de nuevo.");
 			event.preventDefault();
 		}else {
-			let newUser = {
-				id: usuarios.length + 1,
-				nombreapellido: nombreapellido.value,
-				email: email.value,
-				psswd: password.value,
-				edad: edad.value
-		    	};
-		    usuarios.push(newUser);
-		    localStorage.setItem('usuarios', JSON.stringify({usuarios}));
-		    event.preventDefault();
+			$('#submit').click(); // Submit es el botonsito oculto que envía el formulario para todo eso de la base de datos.
 		}
 	});
 
