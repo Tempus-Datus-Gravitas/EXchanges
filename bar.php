@@ -1,3 +1,8 @@
+<?php
+	header('Content-Type: text/html; charset=UTF-8');
+	session_start();
+	include 'conexion.php';
+?>
 <header>
 	<div id="name">
 			<h1 id="title">EX</h1>
@@ -21,17 +26,44 @@
 		<li><a><i class="fa-solid fa-dumbbell"></i>Entretenimiento</a></li>
 		<li><a><i class="fa-solid fa-couch"></i>Hogar y muebles</a></li>
 	</ul>
-	<i id="usercircle" class="fa-regular fa-user-circle"></i>
+	<?php
+		if (ISSET($_SESSION['user_username'])){
+			echo '<div id="usercircle">
+				<img src="data:image/jpeg;base64,'.base64_encode($_SESSION['user_pfp']).'" alt="Foto de perfil">
+			      </div>';
+		}else{
+			echo '<div id="usercircle">
+				<i class="fa-regular fa-user-circle"></i>
+			      </div>';
+		}
+	?>
 	<ul class="listing fromuser">
 		<div id="userlogin">
-		     <i class="fa-regular fa-circle-user"></i>
-		     <a href="login.php"><p>Iniciar sesión</p></a>
+		<?php	
+				if (ISSET($_SESSION['user_username'])) {
+					echo '<img src="data:image/jpeg;base64,'.base64_encode($_SESSION['user_pfp']).'" alt="Foto de perfil">
+					      <a href=""><p>'.$_SESSION['user_username'].'</p></a>';
+				}else{
+					echo '<i class="fa-regular fa-circle-user"></i>
+					<a href="login.php"><p>Iniciar sesión</p></a>';
+				}
+			?>
+
 		</div>
-		<li><a>Configuración de la cuenta</a></li>
-		<li><a>Permutaciones hechas</a></li>
-		<li><a>Mis publicaciones</a></li>
-		<li><a>Notificaciones</a></li>
-		<li><a>Cerrar sesión</a></li>
+		<?php
+			if (ISSET($_SESSION['user_username'])) {
+				echo '<li><a href="">Permutaciones hechas</a></li>
+				      <li><a href="">Mis publicaciones</a></li>
+				      <li><a href="">Notificaciones</a></li>
+				      <li><a href="cerrarsesion.php">Cerrar sesión</a></li>';
+			}else{
+				echo '<li><a href="register.php">Registrarse</a></li>';
+			}
+
+			if (ISSET($_SESSION['user_username']) && $_SESSION['user_admin'] == 1) {
+				echo '<li><a href="admin.php">Panel de administrador</a></li>';
+			}
+		?>
 	</ul>
 	<i id="burger" class="fa-solid fa-bars"></i>
 	<ul id="burger-menu">
@@ -41,6 +73,4 @@
 </header>
 <script src="lib/jquery-3.7.1.min.js.js"></script>
 <script src="js/bar.js"></script>
-<?php
-header('Content-Type: text/html; charset=UTF-8');
-?>
+
