@@ -27,23 +27,51 @@ Comienza a permutar con otras personas. ¡Es gratis!</p>
 				</div>
 			</div>
 			<div id="signlog">
-			<h3>Iniciar sesión</h3>
-			<div id="inputs">
-				<div class="inputspace">
-					<p>Correo</p>
-					<input type="email" id="email" placeholder="">
+				<h3>Iniciar sesión</h3>
+				<div id="inputs">
+					<form id="form" method="POST">
+						<div class="inputspace">
+							<p>Correo</p>
+							<input type="email" id="email" placeholder="" name="email">
+						</div>
+						<div class="inputspace">
+							<p>Contraseña</p>
+							<input type="password" id="password" placeholder="" name="password">
+						</div>
+					<p class="nobtn" id="login">Iniciar sesión</p>
+					<input type="submit" id="submit" style="display:none;">
+					</form>
 				</div>
-				<div class="inputspace">
-					<p>Contraseña</p>
-					<input type="password" id="password" placeholder="">
-				</div>
-			<p class="nobtn" id="login">Iniciar sesión</p>
 			</div>
-
-			</div>
-
-
 		</div>
+		<?php
+			if (ISSET($_POST['email']) && ISSET($_POST['password'])) {
+				//El codigo evita inyecciones SQL y verifica si el usuario existe en la base de datos, lo segundo es obvio.
+				require_once 'conexion.php';
+				$stmt = $conn->prepare("SELECT * FROM users WHERE email = ? AND password = ?");
+				$email = $_POST['email'];
+				$password = $_POST['password'];
+				$stmt->bind_param("ss", $email, $password); 
+				$stmt->execute(); 
+				$result = $stmt->get_result();
+				if ($result->num_rows > 0) {
+					$row = $result->fetch_assoc();
+					if ($row) {
+						session_start();
+						$_SESSION['user_username'] = $row['username'];
+						$_SESSION['user_email'] = $row['email'];
+						$_SESSION['user_admin'] = $row['admin'];
+						$_SESSION['user_verified'] = $row['verified'];
+						$_SESSION['user_pfp'] = $row['pfp'];
+						session_regenerate_id(true); // Evita la fijación de sesión
+						echo "<script>alert('Inicio de sesión exitoso');</script>";
+						echo "<script>window.location.href = 'index.php';</script>";
+					}
+				}else {
+					echo "<script>alert('Usuario o contraseña incorrectos');</script>";
+				}
+			}
+		?>
 		<script src="lib/jquery-3.7.1.min.js.js"></script>
 		<script src="js/signlog.js"></script>
 	</body>
