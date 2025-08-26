@@ -114,11 +114,21 @@ header input {
   margin: 15px;
   cursor: pointer;
 }
-
-#usercircle{
-  color: #fff;
+#userlogin img{
+	aspect-ratio: 1/1;
+	width: 85px;
+	border-radius: 50%;
 }
 
+#usercircle img{
+	aspect-ratio: 1/1;
+	width: 50px;
+	border-radius: 50%;
+	&:hover{
+		cursor: pointer;
+		transition: transform 0.3s ease;
+	}
+}
 #burger {
   display: none;
   font-size: 36px;
@@ -153,24 +163,24 @@ header input {
       }
 		}
 		&.fromuser{
-      display:none;
-      position: absolute;
-      top: 100px;
-      right: 220px;
+			display:none;
+			position: absolute;
+			top: 100px;
+			right: 220px;
 			width: 250px;
 			font-size: 16px;
 			right: 10px;
-      margin-top: 10px;
+			margin-top: 10px;
 			li{
 				margin: 10px 0;
 			}
 			#userlogin{
-        display:flex;
+        			display:flex;
 		 		flex-direction: row;
 				.fa-circle-user{
-          font-size:85px;
-          color:#2f2f2f;
-          margin-bottom: 20px;
+					font-size:85px;
+					color:#2f2f2f;
+					margin-bottom: 20px;
 				}
 				a{
 					all: unset;

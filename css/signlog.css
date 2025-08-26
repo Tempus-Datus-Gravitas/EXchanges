@@ -109,6 +109,7 @@ body{
 				background: #202020;
 				align-self: start;
 				text-align: center;
+				border-style: none;
 			}
 			.nobtn:hover{
 					cursor: pointer;
@@ -185,6 +186,7 @@ body{
 				align-self: start;
 				text-align: center;
 				margin-left: 80px;
+				border-style: none;
 			}
 				.nobtn:hover{
 					cursor: pointer;
