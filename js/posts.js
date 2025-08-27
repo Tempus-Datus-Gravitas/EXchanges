@@ -1,5 +1,5 @@
-<<<<<<< HEAD
-let postsJSON = '[' +
+
+/*let postsJSON = '[' +
 '{ "id":0, "imagen":"img/1.jpg", "nombre":"Buzo de lana blanco", "desc":"Usado talla L, ancho 61cm, largo 74cm, manga 90cm", "categoria":"Vestimenta" },' +
 '{ "id":1, "imagen":"img/2.jpg", "nombre":"Katana de acero", "desc":"Obra maestra de la forja. Cada detalle de esta katana, desde la empuñadura hasta la hoja, es un testimonio de la habilidad y dedicación del artesano.", "categoria":"Herramientas" }, '+ 
 '{ "id":2, "imagen":"img/3.jpg", "nombre":"Anillo de plata 925", "desc":"El brillo sutil de la aguamarina en un diseño delicado. Este anillo de plata con detalles de bolitas es una pieza única y especial. ¡Ideal para un regalo o para mimarte a ti misma!", "categoria":"Accesorios" }, ' +
@@ -51,7 +51,7 @@ for (let i = posts.length-1; i >= posts.length-8; i--) {
 	card.appendChild(h2);
 	card.appendChild(p);
 	cards.appendChild(card);
-}
-=======
+}*/
+//Archivo actualmente en desuso
 
 >>>>>>> francciscobranch
