@@ -7,7 +7,7 @@ window.onload = (event) => {
 	});
 };
 
-<<<<<<< HEAD
+
 let title = document.createElement('h1');
 title.id = 'title';
 title.textContent = 'EX';
@@ -118,7 +118,7 @@ user.addEventListener('click', function() {
 	    `;
 	    container.appendChild(usermenu);
 	    userstatus = "active";
-=======
+			
 // Función que utiliza la flecha al lado de donde dice categorías para abrir el menú desplegable
 let state='inactive';
 $('.arrow').on('click', function() {
@@ -161,7 +161,7 @@ $('#usercircle').on('click', function() {
         }
 	    $('.fromuser').css('display', 'block'); // Muestra el menú de usuario
 	    userstatus = "active"; 
->>>>>>> francciscobranch
+
 	}else if (userstatus === "active") {
 		//Por si el menú de usuario está visible
 	    $('.fromuser').css('display', 'none'); // Remueve el menú de usuario
@@ -169,7 +169,6 @@ $('#usercircle').on('click', function() {
 	}
 });
 
-<<<<<<< HEAD
 // Create the burger to put in the corner of the header
 let burger = document.createElement('p');
 burger.id = 'burger';
@@ -226,7 +225,7 @@ burger.addEventListener('click', function() {
 });
 header.appendChild(burger);
 
-=======
+
 // Crea hamburgesa con su contenido 
 let burgerstatus = 'inactive';
 $('#burger').on('click', function() {
