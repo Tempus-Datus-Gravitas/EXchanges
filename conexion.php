@@ -1,6 +1,4 @@
 <?php
-    $conn = mysqli_connect('localhost','root','','exchanges');
-    if(!$conn) {
-        echo '<script>window.location.href = "error.php";</script>';
-    }
-?>
+	$conn = new mysqli('localhost','root','','exchanges');
+	$conn->set_charset('utf8'); //ESto se agregó porque no agarra tildes ni ñ de la base de datos
+ ?>
