@@ -66,3 +66,32 @@
 	   text-align: center;
 	   margin-top: 0;
    }
+
+@media (prefers-color-scheme: light) {
+	.chat-sidebar {
+		background: #f0f0f0;
+		border-right: 1px solid #ccc;
+	}
+	.chat-sidebar input {
+		background: #fff;
+		color: #000;
+	}
+	.chat-item {
+		border-bottom: 1px solid #ddd;
+	}
+	.chat-item:hover, .chat-item.active {
+		background: #e0e0e0;
+	}
+	.chat-info strong {
+		color: #000;
+	}
+	.chat-info span {
+		color: #555;
+	}
+	.chat-window {
+		background: #fafafa;
+	}
+	.chat-placeholder {
+		color: #555;
+	}
+}
