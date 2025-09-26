@@ -35,7 +35,23 @@ function iniciodesesion(){
 			alert("Por favor, completa todos los campos.");
 			event.preventDefault();
 		}else{
-			$('#submit').click(); // Submit es el botonsito oculto que envía el formulario para todo eso de la base de datos.
+			$.ajax({
+				type: "POST",
+				url: "loginbackend.php",
+				data: { email: email.value, password: password.value },
+				dataType: "json",
+				success: function(response) {
+					if (response.status === "success") {
+					alert("Inicio de sesión exitoso. Redirigiendo...");
+					window.location.href = "index.php";
+					} else {
+						alert("Correo o contraseña incorrectos. Por favor, inténtalo de nuevo.");
+					}
+				},
+				error: function() {
+				alert("Error en la conexión. Por favor, inténtalo de nuevo más tarde.");
+				}
+			});
 		}
 	});
 }
