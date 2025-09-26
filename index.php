@@ -12,6 +12,10 @@
 		<title>Inicio</title>
 	</head>
 	<body> 
+		<div class="cargando">
+			<h1>Cargando...</h1>
+			<img src="https://i.gifer.com/ZZ5H.gif" alt="Cargando">
+		</div>
 		<?php 
 			header('Content-Type: text/html; charset=UTF-8');
 			include 'bar.php';
@@ -31,14 +35,12 @@
 							$json[] = array(
 								'photo' => $row['photo'],
 								'name' => $row['name'],
-								'description' => $row['description']
 							);
 							echo '<div class="card">
 								<div class="image">
 									<img src="data:image/jpeg;base64,'.base64_encode($row['photo']).'" alt="Imagen del producto">
 								</div>
 									<h2>'.$row['name'].'</h2>
-									<p>'.$row['description'].'</p>
 								</div>';
 						}
 					}else{
@@ -52,6 +54,6 @@
 		</div>
 		<script src="lib/jquery-3.7.1.min.js.js"></script>
 		<script src="js/posts.js"></script>
-
+		<script src="js/load.js"></script>
 	</body>
 </html>
