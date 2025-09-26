@@ -13,7 +13,6 @@
 	</head>
 	<body> 
 		<div class="cargando">
-			<h1>Cargando...</h1>
 			<img src="https://i.gifer.com/ZZ5H.gif" alt="Cargando">
 		</div>
 		<?php 
@@ -54,6 +53,11 @@
 		</div>
 		<script src="lib/jquery-3.7.1.min.js.js"></script>
 		<script src="js/posts.js"></script>
-		<script src="js/load.js"></script>
+		<script>
+		var cargando = document.querySelector(".cargando");
+		window.addEventListener('load', function() {
+		  cargando.style.display = 'none';
+		})
+		</script>
 	</body>
 </html>
