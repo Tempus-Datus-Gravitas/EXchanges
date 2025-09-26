@@ -1,8 +1,15 @@
 <?php
 header('Content-Type: text/html; charset=UTF-8');
 require_once 'conexion.php';
+session_start();
+if (!isset($_SESSION['user_username'])) {
+	echo "<style>container{ display: none; }</style>";
+	echo "<script>alert('Debes iniciar sesión para acceder a esta página.'); window.location.href = 'login.php';</script>";
+}
+
+
 $chats = [
-	["nombre" => "FacuPermutaciones", "mensaje" => "¿Dónde quedamos?", "img" => "img/perfil1.jpg"],
+	["nombre" => "FacuPermutaciones", "ultimomensaje" => "¿Dónde quedamos?", "img" => "img/perfil1.jpg"],
 	["nombre" => "SansTradeos", "mensaje" => "Sobre las crocs que...", "img" => "img/perfil2.jpg"],
 	["nombre" => "LuisaFRGC", "mensaje" => "¿Te parece bien que...", "img" => "img/perfil4.jpg"],
 	["nombre" => "UsuarioX", "mensaje" => "", "img" => "img/perfil3.jpg"],
