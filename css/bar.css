@@ -229,6 +229,8 @@ header input {
 		width: 100%;
 		align-items: flex-start;
 		margin-left: 10px;
+		background: #3d3d3d;
+		padding: 10px 20px;
 	}
 	.fa-user-circle {
 		position: absolute;
@@ -292,48 +294,3 @@ header input {
 		}
 	}
 }
-@media (prefers-color-scheme: light) {
-	header {
-    		background: rgba(200, 200, 200, 1);
-    		color: #000;
-	}
-	header input {
-		background: #fff;
-		color: #000;
-		border: solid 1px #aaa;
-	}
-	#navegacion .normal {
-    		color: #555;
-  	}
-  	#navegacion .normal:hover {
-    		color: #000;
-  	}
-  	#navegacion .active {
-    		color: #000;
-    		border-bottom: solid 2px #000;
-  	}
-  	.fa-user-circle {
-    		color: #888;
-  	}
-  	.listing{
-		background: #e0e0e0;
-		li{
-			color: #000;
-			&:hover{
-				color: #333;
-			}
-		}
-		#userlogin{
-			.fa-circle-user{
-				color:#888888;
-			}
-			a{
-				color:#000;
-				&:hover{
-					color:#333;
-				}
-			}			
-		}
-	}
-}
-

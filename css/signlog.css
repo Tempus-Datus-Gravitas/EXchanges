@@ -2,13 +2,14 @@
 font-family: "Inter","FontAwesome", "Montserrat", sans-serif;
 color: #fff;
 }
-html{
-	background: #363636;
-}
 body{
 	margin: 0;
 	padding: 0;
-	background: radial-gradient(ellipse at left top, #3c3c3c, #313131); 
+	width: 100%;
+	background: #363636;
+	background: radial-gradient(ellipse at left top, #3c3c3c, #313131);
+	height: 100%;
+	background-size: cover;
 }
 @keyframes slideInFromLeft {
   0% {
@@ -127,7 +128,6 @@ body{
 		order: 1;
 		flex-direction: column;
 		animation: 1s ease-out 0s 1 slideInFromRight;
-		background: #2E2E2Eaa;
 		height: 100%;
 		width: 50%;
 			h3{
@@ -284,8 +284,156 @@ body{
 				}
 			}
 		}
-		.nobtn,#iniciar.nobtn, #registrar.nobtn{
+
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	body{
+		background: #363636;
+		background: radial-gradient(ellipse at left top, #3c3c3c, #313131);
+		color: #fff;
+	}
+	#goback{
+		color: #fff;
+	}
+	.name{
+		#title{
+			text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+		}
+		#subtitle{
+			color: #fff;
+		}
+	}
+	#welcome{
+		p{
+			color: #fff;
+		}
+		#info{
+			h2{
+				color: #fff;
+			}
+			p{
+				color: #fff;
+			}
+			.nobtn{
+				background: #202020;
+				color: #fff;
+			}
+			.nobtn:hover{
+					cursor: pointer;
+					transition: background 0.3s ease;
+					color: #000;
+					background: #DEDEDE;
 			}
 
+		}
+	}
+	#signlog{
+		background: #2c2c2c;
+			h3{
+				color: #fff;
+			}
+			#progressbar{
+				background: #6a6a6a;
+			}
+			.textzone p{
+				color: white;
+			}
+			#inputs{
+				p{
+					color: #fff;
+				}
+				input{
+					box-shadow: 0 2px 0 #fff;
+					color: #fff;
+				}
+			
+				.nobtn{
+					background: #202020;
+					color: #fff;
+				}
+				.nobtn:hover{
+					cursor: pointer;
+					transition: background 0.3s ease;
+					color: #000;
+					background: #DEDEDE;
+				}
+			}
+	}
+}
+
+@media (prefers-color-scheme: light) {
+	body{
+		background: #DEDEDE;
+		background: radial-gradient(ellipse at left top, #E8E8E8, #CFCFCF);
+		color: #000;
+	}
+	#goback{
+		color: #000;
+	}
+	.name{
+		#title{
+			text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+		}
+		#subtitle{
+			color: #000;
+		}
+	}
+	#welcome{
+		p{
+			color: #000;
+		}
+		#info{
+			h2{
+				color: #000;
+			}
+			p{
+				color: #000;
+			}
+			.nobtn{
+				background: #202020;
+				color: #fff;
+			}
+			.nobtn:hover{
+					cursor: pointer;
+					transition: background 0.3s ease;
+					color: #000;
+					background: #E0E0E0;
+			}
+
+		}
+	}
+	#signlog{
+		background: #F0F0F0;
+			h3{
+				color: #000;
+			}
+			#progressbar{
+				background: #C4C2D9;
+			}
+			.textzone p{
+				color: black;
+			}
+			#inputs{
+				p{
+					color: #000;
+				}
+				input{
+					box-shadow: 0 2px 0 #000;
+					color: #000;
+				}
+			
+				.nobtn{
+					background: #202020;
+					color: #fff;
+				}
+				.nobtn:hover{
+					cursor: pointer;
+					transition: background 0.3s ease;
+					color: #000;
+					background: #E0E0E0;
+				}
+			}
 	}
 }
