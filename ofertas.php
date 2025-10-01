@@ -83,7 +83,6 @@ foreach ($ofertas as $items) {
             echo '    <img src="' . htmlspecialchars($item['img']) . '" alt="' . htmlspecialchars($item['titulo']) . '">';
             echo '  </div>';
             echo '  <h2>' . htmlspecialchars($item['titulo']) . '</h2>';
-            echo '  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>';
             echo '</div>';
         }
     }

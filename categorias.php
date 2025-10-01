@@ -63,6 +63,12 @@ $ofertas = [
    <style>
 	   .ofertas-categoria {
 		   margin-top: 30px;
+		   h2 {
+			   font-size: 24px;
+			   color: #333;
+			   margin-bottom: 15px;
+			   text-align: center;
+		   }
 	   }
 	   .ofertas-grid {
 		   display: flex;
@@ -112,7 +118,6 @@ $ofertas = [
 								  <img src="<?= htmlspecialchars($item['img']) ?>" alt="<?= htmlspecialchars($item['titulo']) ?>">
 							  </div>
 							  <h2><?= htmlspecialchars($item['titulo']) ?></h2>
-							<p><?= htmlspecialchars($item['desc']) ?></p>
 						  </div>
 					  <?php endforeach; ?>
 				   </div>
