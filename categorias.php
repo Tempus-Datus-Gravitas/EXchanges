@@ -56,50 +56,11 @@ $ofertas = [
    <link rel="stylesheet" href="css/inicio.css">
    <link rel="stylesheet" href="css/bar.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+   <link rel="stylesheet" href="css/categorias.css">
    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
    <link href='https://fonts.googleapis.com/css?family=Expletus Sans' rel='stylesheet'>
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Categorías</title>
-   <style>
-	   .ofertas-categoria {
-		   margin-top: 30px;
-		   h2 {
-			   font-size: 24px;
-			   color: #333;
-			   margin-bottom: 15px;
-			   text-align: center;
-		   }
-	   }
-	   .ofertas-grid {
-		   display: flex;
-		   gap: 15px;
-		   flex-wrap: wrap;
-	   }
-	   .oferta-card {
-		   background: white;
-		   color: black;
-		   width: 180px;
-		   border-radius: 10px;
-		   overflow: hidden;
-		   text-align: center;
-		   box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-		   margin-bottom: 20px;
-	   }
-	   .oferta-card img {
-		   width: 100%;
-		   height: 120px;
-		   object-fit: cover;
-	   }
-	   .oferta-card h3 {
-		   margin: 10px 0 5px 0;
-		   font-size: 16px;
-	   }
-	   .oferta-card p {
-		   font-size: 12px;
-		   padding: 0 10px 10px;
-		   color: #444;
-	   }
-   </style>
 </head>
 <body>
    <?php include 'bar.php'; ?>
