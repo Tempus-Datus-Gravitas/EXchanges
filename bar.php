@@ -4,7 +4,7 @@
 	include 'conexion.php';
 ?>
 <header>
-	<div id="name">
+	<div id="name" onclick="location.href='index.php'">
 			<h1 id="title">EX</h1>
 			<h1 id="subtitle">changes</h1>
 	</div>
