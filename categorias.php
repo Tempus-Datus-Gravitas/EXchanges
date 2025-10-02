@@ -32,7 +32,7 @@
 							."<div class='image'>"
 							."<img src=data:image/jpeg;base64,".base64_encode($row2['photo'])." alt='Imagen del producto'>"
 							."</div>"
-							."<h3>".$row2['name']."</h3>"
+							."<h2>".$row2['name']."</h2>"
 							."</div>";
 					}
 					echo "</div>"
