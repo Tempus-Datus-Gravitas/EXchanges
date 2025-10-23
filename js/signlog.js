@@ -36,7 +36,7 @@ function iniciodesesion(){
 			event.preventDefault();
 		}else{
 			$.ajax({
-				type: "POST",
+				type: "GET",
 				url: "loginbackend.php",
 				data: { email: email.value, password: password.value },
 				dataType: "json",
@@ -96,9 +96,9 @@ function registro() {
 
 	next.addEventListener('click', function() {
 	if (nombreapellido.value === "" || edad.value === "" || username.value === "") {
-		alert("Por favor, completa todos los campos**.");
+		alert("Por favor, completa todos los campos.");
 		event.preventDefault();
-	}else if (edad.value < 18) {
+	}else if (calculateAge(new Date(edad.value)) < 18) {
 		alert("Debes tener al menos 18 años para registrarte.");
 		event.preventDefault();
 	}else if (nombreapellido.value.length < 8) {
@@ -124,8 +124,38 @@ function registro() {
 			alert("Las contraseñas no coinciden. Por favor, inténtalo de nuevo.");
 			event.preventDefault();
 		}else {
-			$('#submit').click(); // Submit es el botonsito oculto que envía el formulario para todo eso de la base de datos.
+			$.ajax({
+				url: "registerbackend.php",
+				type: "POST",
+				data: { name: nombreapellido.value, username: username.value, email: email.value, password: password.value },
+				dataType: "json",
+				success: function(response) {
+					if (response.status === "success") {
+						$.ajax({
+							type: "GET",
+							url: "loginbackend.php",
+							data: { email: email.value, password: password.value },
+						});
+						alert("Registro exitoso. Redirigiendo al inicio");
+						window.location.href = "index.php";
+					} else {
+						alert("Error en el registro: " + response.message);
+					}
+				},
+			});
 		}
 	});
 
 }
+
+function calculateAge(birthDate) {
+	let today = new Date();
+	let age = today.getFullYear() - birthDate.getFullYear();
+	let monthDifference = today.getMonth() - birthDate.getMonth();
+
+	if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+		age--;
+	}
+	return age;
+}
+

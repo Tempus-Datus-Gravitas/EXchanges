@@ -1,7 +1,7 @@
 <?php
 	include_once 'conexion.php';
-	$email= $_POST['email'];
-	$password = $_POST['password'];
+	$email= $_GET['email'];
+	$password = $_GET['password'];
 	header('Content-Type: application/json');
 	// Verificar si el usuario ya existe
 	$stmt = $conn->prepare("SELECT * FROM users WHERE email = ? AND password = ?");
