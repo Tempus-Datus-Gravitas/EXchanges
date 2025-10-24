@@ -4,6 +4,7 @@
 	$username = $_POST['username'];
 	$email = $_POST['email'];
 	$password = $_POST['password'];
+	$hashedpassword = password_hash($password, PASSWORD_DEFAULT);
 	header('Content-Type: application/json');
 	// Verificar si el usuario ya existe
 	$stmt = $conn->prepare("SELECT * FROM users WHERE email = ? OR username = ?");
@@ -15,7 +16,7 @@
 	} else {
 		// Insertar el nuevo usuario
 		$stmt = $conn->prepare("INSERT INTO users (name, username, email, password) VALUES (?, ?, ?, ?)");
-		$stmt->bind_param("ssss", $name, $username, $email, $password);
+		$stmt->bind_param("ssss", $name, $username, $email, $hashedpassword);
 		if ($stmt->execute()) {
 			echo json_encode(array("status" => "success"));
 		} else {
