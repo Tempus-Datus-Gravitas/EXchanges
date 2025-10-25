@@ -1,8 +1,7 @@
 <?php
 	include 'conexion.php';
-	if ($conn) {
+	if ($conn->connect_error) {
 		header("Location: index.php");
-		exit();
 	}
 ?>
 <!DOCTYPE html>
