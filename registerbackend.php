@@ -16,7 +16,8 @@
 	} else {
 		// Insertar el nuevo usuario
 		$stmt = $conn->prepare("INSERT INTO users (name, username, email, password) VALUES (?, ?, ?, ?)");
-		$stmt->bind_param("ssss", $name, $username, $email, $hashedpassword);
+		$stmt->bind_param("ssss", $name, $username, $email, $hashedpassword)
+			;
 		if ($stmt->execute()) {
 			echo json_encode(array("status" => "success"));
 		} else {

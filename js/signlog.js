@@ -36,7 +36,6 @@ function iniciodesesion(){
 			event.preventDefault();
 		}else{
 			$.ajax({
-				type: "GET",
 				url: "loginbackend.php",
 				data: { email: email.value, password: password.value },
 				dataType: "json",
@@ -132,7 +131,6 @@ function registro() {
 				success: function(response) {
 					if (response.status === "success") {
 						$.ajax({
-							type: "GET",
 							url: "loginbackend.php",
 							data: { email: email.value, password: password.value },
 						});
@@ -140,6 +138,7 @@ function registro() {
 						window.location.href = "index.php";
 					} else {
 						alert("Error en el registro: " + response.message);
+						location.reload();
 					}
 				},
 			});
