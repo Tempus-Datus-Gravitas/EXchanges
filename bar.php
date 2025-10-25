@@ -29,7 +29,7 @@
 	<?php
 		if (ISSET($_SESSION['user_username'])){
 			echo '<div id="usercircle">
-				<img src="data:image/jpeg;base64,'.base64_encode($_SESSION['user_pfp']).'" alt="Foto de perfil">
+				<img src="data:image/jpeg;base64,'.base64_encode($_SESSION['user_pfp']).'" alt="Tu Foto">
 			      </div>';
 		}else{
 			echo '<div id="usercircle">

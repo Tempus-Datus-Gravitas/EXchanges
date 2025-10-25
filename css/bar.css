@@ -66,11 +66,14 @@ header input {
 	color: #fff;
 	font-size: 20px;
 	padding: 1px 20px;
-	margin: 20px 0;
+	margin: 30px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: row;
+	&:focus {
+		outline: none;
+	}
 }
 
 #navegacion {
@@ -124,13 +127,21 @@ header input {
 	color: #fff;
 }
 
+#usercircle :hover{
+	border-radius: 0%;
+	background-color:white;
+	transition: all 0.3s ease;
+	color: black;
+}
+
+
 #usercircle img{
 	aspect-ratio: 1/1;
 	width: 50px;
 	border-radius: 50%;
 	&:hover{
 		cursor: pointer;
-		transition: transform 0.3s ease;
+		transition: all 0.3s ease;
 	}
 }
 #burger {

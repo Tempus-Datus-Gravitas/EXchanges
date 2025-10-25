@@ -77,3 +77,17 @@ $('#burger').on('click', function() {
 	
     }
 });
+
+$('.fromcategory > li').each(function() {
+	$(this).on('click', function() {
+		let category = $(this).text();
+		$.ajax({
+			type:"GET",
+			url:"setcategory.php",
+			data: {category: category},
+			success: function() {
+				window.location.href = "categorias.php";
+			}
+		});
+	});
+});
