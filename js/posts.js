@@ -11,7 +11,7 @@ if ($('title').text() === "Inicio") {
 					cards.append(`
 			    			<div class="card">
 							<div class="image">
-				    			<img src="${post.photo}" alt="${post.name}">
+				    			<img src="data:image/webp;base64,${post.photo}" alt="${post.name}">
 							</div>
 							<h2>${post.name}</h2>
 			    			</div>

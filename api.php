@@ -26,7 +26,7 @@ function handleGetRequest() {
     //Lo de abajo es un montón de sanitización y cosas de esas. 
     $table = isset($_GET['table']) && in_array($_GET['table'], $allowedTables) ? $_GET['table'] : 'posts';
     $order = isset($_GET['order']) && in_array(strtoupper($_GET['order']), $allowedOrderDirections) ? strtoupper($_GET['order']) : 'DESC';
-    $what = '*';
+    $what = isset($_GET['what']) ? $_GET['what'] : '*';
 
     $whereClause = '1';
     $whereParams = [];
@@ -43,21 +43,35 @@ function handleGetRequest() {
         
         foreach ($whereParams as $placeholder => $value) {
             $stmt->bindValue($placeholder, $value);
-        }
-        
-        $stmt->execute();
-        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+       	}
 
-        if ($results) {
+	$processedRow = [];
+	$stmt->execute();
+
+	$json = array();
+	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+		$json[] = array(
+			'id' => $row['id'],
+			'name' => $row['name'],
+			'description' => $row['description'],
+			'user_id' => $row['user_id'],
+			'photo' => base64_encode($row['photo']),
+			'category' =>$row['category'],
+			'status' =>$row['status'],
+			'created_at' =>$row['created_at']	
+		);
+	} 
+		
+	if (!empty($json)) {
             echo json_encode([
                 'status' => 'success',
-                'data' => $results
+                'data' => $json
             ]);
         } else {
             http_response_code(404);
             echo json_encode([
                 'status' => 'error',
-                'message' => 'No data found.'
+                'message' => 'No se encontraron publicaciones'
             ]);
         }
 
@@ -66,7 +80,7 @@ function handleGetRequest() {
         error_log('Database query failed: ' . $e->getMessage());
         echo json_encode([
             'status' => 'error',
-            'message' => 'An internal server error occurred.'
+            'message' => 'Error de server'
         ]);
     }
 }
