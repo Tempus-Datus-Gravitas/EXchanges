@@ -38,12 +38,8 @@ function handleGetRequest() {
     $sortColumn = isset($_GET['sort']) && in_array($_GET['sort'], $allowedSortColumns) ? $_GET['sort'] : 'id';
     
     try {
-	if ($table != 'posts'){
-        	$sql = 'SELECT ' . $what . ' FROM `' . $table . '` WHERE ' . $whereClause . ' ORDER BY `' . $sortColumn . '` ' . $order;
-	}else {
-		$sql = 'SELECT ' . $what . ' FROM `' . $table . '` WHERE ' . $whereClause . ' ORDER BY `' . $sortColumn . '` ' . $order;
-	}
-	$stmt = $conn->prepare($sql);
+        $sql = 'SELECT ' . $what . ' FROM `' . $table . '` WHERE ' . $whereClause . ' ORDER BY `' . $sortColumn . '` ' . $order;
+        $stmt = $conn->prepare($sql);
         
         foreach ($whereParams as $placeholder => $value) {
             $stmt->bindValue($placeholder, $value);
