@@ -42,7 +42,7 @@
 		<?php	
 				if (ISSET($_SESSION['user_username'])) {
 					echo '<img src="data:image/jpeg;base64,'.base64_encode($_SESSION['user_pfp']).'" alt="Foto de perfil">
-					      <a href=""><p>'.$_SESSION['user_username'].'</p></a>';
+					      <a href="perfil.php"><p>'.$_SESSION['user_username'].'</p></a>';
 				}else{
 					echo '<i class="fa-regular fa-circle-user"></i>
 					<a href="login.php"><p>Iniciar sesión</p></a>';
@@ -52,7 +52,7 @@
 		</div>
 		<?php
 			if (ISSET($_SESSION['user_username'])) {
-				echo '<li><a href="">Permutaciones hechas</a></li>
+				echo '<li><a href="crearpublicacion.php">Crear publicación</a></li>
 				      <li><a href="">Mis publicaciones</a></li>
 				      <li><a href="">Notificaciones</a></li>
 				      <li><a href="cerrarsesion.php">Cerrar sesión</a></li>';
