@@ -12,48 +12,49 @@ function iniciodesesion(){
 // --------------------------
 //     Inicio de sesión
 // --------------------------
-	let login = document.querySelector('#login');
-	let email = document.querySelector('#email'); 
-	let password = document.querySelector('#password'); 
-	let inputspace = $('.inputspace > input'); // Selecciona todos los inputs dentro de la clase inputspace.
+let login = document.querySelector('#login');
+let email = document.querySelector('#email'); 
+let password = document.querySelector('#password'); 
+let inputspace = $('.inputspace > input');
 
-	// Por cada inputspace, crear un evento de keyup para que al presionar Enter se enfoque en el siguiente input.
-	$(inputspace).each(function(index) {
-		$(this).on('keyup', function(event) {
-			if (event.key === 'Enter') {
-				if (index < inputspace.length - 1) {
-					inputspace[index + 1].focus();
-				} else {
-					login.click(); 
-				}
-			}
-		});
-	});	
+$(inputspace).each(function(index) {
+    $(this).on('keyup', function(event) {
+        if (event.key === 'Enter') {
+            if (index < inputspace.length - 1) {
+                inputspace[index + 1].focus();
+            } else {
+                login.click(); 
+            }
+        }
+    });
+});
 
-	login.addEventListener('click', function() {
-		if (email.value === "" || password.value === "") {
-			alert("Por favor, completa todos los campos.");
-			event.preventDefault();
-		}else{
-			$.ajax({
-				type: "POST",
-				url: "loginbackend.php",
-				data: { email: email.value, password: password.value },
-				dataType: "json",
-				success: function(response) {
-					if (response.status === "success") {
-					alert("Inicio de sesión exitoso. Redirigiendo...");
-					window.location.href = "index.php";
-					} else {
-						alert("Correo o contraseña incorrectos. Por favor, inténtalo de nuevo.");
-					}
-				},
-				error: function() {
-				alert("Error en la conexión. Por favor, inténtalo de nuevo más tarde.");
-				}
-			});
-		}
-	});
+login.addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent default button behavior
+    
+    if (email.value === "" || password.value === "") {
+        alert("Por favor, completa todos los campos.");
+    } else {
+        $.ajax({
+            url: "loginbackend.php",
+            method: "POST", // <--- THIS IS THE CRITICAL CHANGE
+            data: { email: email.value, password: password.value },
+            dataType: "json",
+            success: function(response) {
+                if (response.status === "success") {
+                    alert("Inicio de sesión exitoso. Redirigiendo...");
+                    window.location.href = "index.php";
+                } else {
+                    alert("Correo o contraseña incorrectos. Por favor, inténtalo de nuevo.");
+                }
+            },
+            error: function(xhr, status, error) {
+                alert("Error en la conexión. Por favor, inténtalo de nuevo más tarde.");
+                console.error("AJAX Error:", status, error); // Log for debugging
+            }
+        });
+    }
+});
 }
 
 function registro() {
@@ -96,9 +97,9 @@ function registro() {
 
 	next.addEventListener('click', function() {
 	if (nombreapellido.value === "" || edad.value === "" || username.value === "") {
-		alert("Por favor, completa todos los campos**.");
+		alert("Por favor, completa todos los campos.");
 		event.preventDefault();
-	}else if (edad.value < 18) {
+	}else if (calculateAge(new Date(edad.value)) < 18) {
 		alert("Debes tener al menos 18 años para registrarte.");
 		event.preventDefault();
 	}else if (nombreapellido.value.length < 8) {
@@ -124,8 +125,38 @@ function registro() {
 			alert("Las contraseñas no coinciden. Por favor, inténtalo de nuevo.");
 			event.preventDefault();
 		}else {
-			$('#submit').click(); // Submit es el botonsito oculto que envía el formulario para todo eso de la base de datos.
+			$.ajax({
+				url: "registerbackend.php",
+				type: "POST",
+				data: { name: nombreapellido.value, username: username.value, email: email.value, password: password.value },
+				dataType: "json",
+				success: function(response) {
+					if (response.status === "success") {
+						$.ajax({
+							url: "loginbackend.php",
+							data: { email: email.value, password: password.value },
+						});
+						alert("Registro exitoso. Redirigiendo al inicio");
+						window.location.href = "index.php";
+					} else {
+						alert("Error en el registro: " + response.message);
+						location.reload();
+					}
+				},
+			});
 		}
 	});
 
 }
+
+function calculateAge(birthDate) {
+	let today = new Date();
+	let age = today.getFullYear() - birthDate.getFullYear();
+	let monthDifference = today.getMonth() - birthDate.getMonth();
+
+	if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+		age--;
+	}
+	return age;
+}
+

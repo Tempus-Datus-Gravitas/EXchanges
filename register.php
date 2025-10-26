@@ -35,15 +35,14 @@
 					<p id="idea"></p>
 				</div>
 			<div id="inputs">
-				<form id="form" method="POST">
 				<div class="part1">
 					<div class="inputspace">
 						<p>Nombre y Apellido</p>
 						<input type="text" id="name" placeholder="" name="name">
 					</div>
 					<div class="inputspace">
-						<p>Edad</p>
-						<input type="text" id="age" placeholder="" name="age">
+						<p>Fehca de nacimiento</p>
+						<input type="date" id="age" placeholder="" name="age">
 					</div>
 					<div class="inputspace">
 						<p>Nombre de usuario</p>
@@ -65,9 +64,7 @@
 							<p>Repetir contraseña</p>
 							<input type="password" id="password2" placeholder="" name="password2">
 						</div>
-							<p class="nobtn" id="registrarse" onclick="document.getElementById('submit').click();">Registrarse</p>
-							<input type="submit" id="submit" style="display:none;">
-					</form>
+							<p class="nobtn" id="registrarse">Registrarse</p>
 				</div>
 			</div>
 

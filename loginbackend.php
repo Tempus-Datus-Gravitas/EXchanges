@@ -1,27 +1,58 @@
 <?php
-	include_once 'conexion.php';
-	$email= $_POST['email'];
-	$password = $_POST['password'];
-	header('Content-Type: application/json');
-	// Verificar si el usuario ya existe
-	$stmt = $conn->prepare("SELECT * FROM users WHERE email = ? AND password = ?");
-	$stmt->bind_param("ss", $email, $password);
-	$stmt->execute();
-	$result = $stmt->get_result();
-	if ($result->num_rows > 0) {
-		$row = $result->fetch_assoc();
-		if ($row) {
-			session_start();
-			$_SESSION['user_username'] = $row['username'];
-			$_SESSION['user_email'] = $row['email'];
-			$_SESSION['user_admin'] = $row['admin'];
-			$_SESSION['user_verified'] = $row['verified'];
-			$_SESSION['user_pfp'] = $row['pfp'];
-			session_regenerate_id(true); // Evita la fijación de sesión
-			echo json_encode(array("status" => "success"));
-		}
-	} else {
-		echo json_encode(array("status" => "error"));
-	}
-	
+require_once 'conexion.php';
+
+session_start();
+
+header('Content-Type: application/json');
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
+    echo json_encode(['status' => 'error', 'message' => 'Método no permitido.']);
+    exit;
+}
+
+$email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+$password = $_POST['password'] ?? '';
+
+if (!$email || empty($password)) {
+    http_response_code(400);
+    echo json_encode(['status' => 'error', 'message' => 'Por favor, introduce el correo electrónico y la contraseña.']);
+    exit;
+}
+
+try {
+    $stmt = $conn->prepare("SELECT * FROM users WHERE email = :email");
+    $stmt->execute([':email' => $email]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user && password_verify($password, $user['password'])) {
+        session_regenerate_id(true);
+
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['user_username'] = $user['username'];
+        $_SESSION['user_email'] = $user['email'];
+        $_SESSION['user_admin'] = $user['admin'];
+        $_SESSION['user_verified'] = $user['verified'];
+        $_SESSION['user_pfp'] = $user['pfp'];
+
+        echo json_encode([
+            'status' => 'success',
+            'message' => 'Inicio de sesión exitoso.'
+        ]);
+    } else {
+        http_response_code(401);
+        echo json_encode([
+            'status' => 'error',
+            'message' => 'Credenciales incorrectas.'
+        ]);
+    }
+} catch (PDOException $e) {
+    http_response_code(500);
+    error_log("Database error: " . $e->getMessage());
+    echo json_encode([
+        'status' => 'error',
+        'message' => 'Ocurrió un error en el servidor.'
+    ]);
+}
 ?>
+
