@@ -12,47 +12,49 @@ function iniciodesesion(){
 // --------------------------
 //     Inicio de sesión
 // --------------------------
-	let login = document.querySelector('#login');
-	let email = document.querySelector('#email'); 
-	let password = document.querySelector('#password'); 
-	let inputspace = $('.inputspace > input'); // Selecciona todos los inputs dentro de la clase inputspace.
+let login = document.querySelector('#login');
+let email = document.querySelector('#email'); 
+let password = document.querySelector('#password'); 
+let inputspace = $('.inputspace > input');
 
-	// Por cada inputspace, crear un evento de keyup para que al presionar Enter se enfoque en el siguiente input.
-	$(inputspace).each(function(index) {
-		$(this).on('keyup', function(event) {
-			if (event.key === 'Enter') {
-				if (index < inputspace.length - 1) {
-					inputspace[index + 1].focus();
-				} else {
-					login.click(); 
-				}
-			}
-		});
-	});	
+$(inputspace).each(function(index) {
+    $(this).on('keyup', function(event) {
+        if (event.key === 'Enter') {
+            if (index < inputspace.length - 1) {
+                inputspace[index + 1].focus();
+            } else {
+                login.click(); 
+            }
+        }
+    });
+});
 
-	login.addEventListener('click', function() {
-		if (email.value === "" || password.value === "") {
-			alert("Por favor, completa todos los campos.");
-			event.preventDefault();
-		}else{
-			$.ajax({
-				url: "loginbackend.php",
-				data: { email: email.value, password: password.value },
-				dataType: "json",
-				success: function(response) {
-					if (response.status === "success") {
-					alert("Inicio de sesión exitoso. Redirigiendo...");
-					window.location.href = "index.php";
-					} else {
-						alert("Correo o contraseña incorrectos. Por favor, inténtalo de nuevo.");
-					}
-				},
-				error: function() {
-				alert("Error en la conexión. Por favor, inténtalo de nuevo más tarde.");
-				}
-			});
-		}
-	});
+login.addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent default button behavior
+    
+    if (email.value === "" || password.value === "") {
+        alert("Por favor, completa todos los campos.");
+    } else {
+        $.ajax({
+            url: "loginbackend.php",
+            method: "POST", // <--- THIS IS THE CRITICAL CHANGE
+            data: { email: email.value, password: password.value },
+            dataType: "json",
+            success: function(response) {
+                if (response.status === "success") {
+                    alert("Inicio de sesión exitoso. Redirigiendo...");
+                    window.location.href = "index.php";
+                } else {
+                    alert("Correo o contraseña incorrectos. Por favor, inténtalo de nuevo.");
+                }
+            },
+            error: function(xhr, status, error) {
+                alert("Error en la conexión. Por favor, inténtalo de nuevo más tarde.");
+                console.error("AJAX Error:", status, error); // Log for debugging
+            }
+        });
+    }
+});
 }
 
 function registro() {
