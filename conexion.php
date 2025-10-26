@@ -1,4 +1,12 @@
 <?php
-	$conn = new mysqli('localhost','root','','exchanges');
-	$conn->set_charset('utf8'); //ESto se agregó porque no agarra tildes ni ñ de la base de datos
- ?>
+	$host = 'localhost'; 
+	$dbname = 'exchanges';
+	$username = 'root'; 
+	$password = ''; 
+	//Implementado pdo por algo ahí sobre seguridad que leí
+try {
+    $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Connection failed: " . $e->getMessage());
+}?>
