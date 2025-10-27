@@ -16,6 +16,7 @@ include('bar.php');
   <title>Crear publicación</title>
 </head>
 <body>
+</br></br></br>
   <h1>Crear publicación</h1>
   <div class="titu">
     <label for="" class="form-label">Titulo</label> </br>
@@ -53,7 +54,7 @@ include('bar.php');
     />
   </div>
   
-    <label for="" class="form-select">Categoría</label> </br>
+    <label>Categoría</label> </br>
 <select class="form-select" id="Cate" aria-label="Default select example">
   <option selected>Ninguna</option>
   <option value="1">Vestimenta</option>
@@ -71,7 +72,7 @@ include('bar.php');
 <input
   name=""
   id="But"
-  class="Butooo"
+  class="btn btn-primary"
   type="button"
   value="Publicar"
 />
