@@ -1,5 +1,5 @@
 let cards = $("#cards");
-let link = "http://localhost/EXchanges/";
+let link = "http://localhost/EXchanges";
 $(window).on("load", function(){
 	switch ($('title').text()){
 		case "Inicio":
@@ -87,7 +87,10 @@ $(window).on("load", function(){
 						data: {where: `id = ${id}`, limit: "1"},
 						success: function(response){
 							let posts = response.data;
+							console.log(response.data);
 							posts.forEach(post => {
+
+								$('title').text(`${post.name}`);
 								$('.contenedor-producto').append(`
 									   <div class="imagen-producto">
 										<img src="data:image/webp;base64,${post.photo}" alt="${post.name}">
@@ -99,7 +102,9 @@ $(window).on("load", function(){
 
 										<p class="descripcion">${post.description}</p>
 									      </div>
-
+									      <div class="publicador" style="width:10rem height:5rem">
+									      		<p>${post.user_id}</p>
+									      </div>
 									      <div class="botones"post.description>
 										<button class="comprar">EXchange</button>
 										<button class="carrito">Mensaje</button>
