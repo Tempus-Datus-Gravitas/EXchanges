@@ -70,7 +70,6 @@ if ($_POST); {
     />
   </div>
   
-  
     <label for="" class="form-select">Categoría</label> </br>
 <select class="form-select" aria-label="Default select example">
   <option selected>Ninguna</option>
