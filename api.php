@@ -26,27 +26,17 @@ switch ($method) {
 
 function handleGetRequest() {
     global $conn, $allowedTables, $allowedSortColumns, $allowedOrderDirections;
-    //Lo de abajo es un montón de sanitización y cosas de esas. 
+    //Lo de abajo es  //Lo de abajo es un montón de sanitización y cosas de esas. 
     $table = isset($_GET['table']) && in_array($_GET['table'], $allowedTables) ? $_GET['table'] : 'posts';
     $order = isset($_GET['order']) && in_array(strtoupper($_GET['order']), $allowedOrderDirections) ? strtoupper($_GET['order']) : 'DESC';
     $what = isset($_GET['what']) ? $_GET['what'] : '*';
-
-    $whereClause = '1';
-    $whereParams = [];
-    if (isset($_GET['id']) && is_numeric($_GET['id'])) {
-        $whereClause = 'id = :id';
-        $whereParams[':id'] = $_GET['id'];
-    }
-    
+    $whereClause = isset($_GET['where']) ? $_GET['where'] : '1';
+    $limit = isset($_GET['limit']) ? $_GET['limit'] : '20';
     $sortColumn = isset($_GET['sort']) && in_array($_GET['sort'], $allowedSortColumns) ? $_GET['sort'] : 'id';
-    
+
     try {
-        $sql = 'SELECT ' . $what . ' FROM `' . $table . '` WHERE ' . $whereClause . ' ORDER BY `' . $sortColumn . '` ' . $order;
-        $stmt = $conn->prepare($sql);
-        
-        foreach ($whereParams as $placeholder => $value) {
-            $stmt->bindValue($placeholder, $value);
-       	}
+$sql = 'SELECT ' . $what . ' FROM `' . $table . '` WHERE ' . $whereClause . ' ORDER BY `' . $sortColumn . '` ' . $order .' LIMIT ' . $limit;
+    $stmt = $conn->prepare($sql);
 
 	$processedRow = [];
 	$stmt->execute();
@@ -88,69 +78,14 @@ function handleGetRequest() {
     }
 }
 function handlePostRequest() {
-    global $conn;
+    global $conn, $allowedTables, $allowedSortColumns, $allowedOrderDirections;
 
     // Campos mínimos
-    $name = isset($_POST['name']) ? trim($_POST['name']) : '';
-    $description = isset($_POST['description']) ? trim($_POST['description']) : '';
-    $user_id = isset($_POST['user_id']) ? (int)$_POST['user_id'] : 0;
-    $category = isset($_POST['category']) ? $_POST['category'] : 'Vestimentas';
-    $status = isset($_POST['status']) ? $_POST['status'] : 'available';
-
-    // Validación mínima
-    if ($name === '' || $description === '' || $user_id <= 0) {
-        http_response_code(400);
-        echo json_encode(['status' => 'error', 'message' => 'Faltan campos obligatorios: name, description, user_id']);
-        return;
-    }
-
-    // La imagen se procesa en $_FILES['photo']
-    // Convertimos el binario a base64 y guardamos esa cadena en la columna photo.
-    $photoBase64 = null;
-    if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
-        $tmpName = $_FILES['photo']['tmp_name'];
-        $data = @file_get_contents($tmpName);
-        if ($data !== false) {
-            $photoBase64 = base64_encode($data);
-        } else {
-            http_response_code(400);
-            echo json_encode(['status' => 'error', 'message' => 'No se pudo leer el archivo subido']);
-            return;
-        }
-    }
-
-    try {
-        $sql = "INSERT INTO posts (name, description, user_id, photo, category, status)
-                VALUES (:name, :description, :user_id, :photo, :category, :status)";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindValue(':name', $name);
-        $stmt->bindValue(':description', $description);
-        $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
-
-        if ($photoBase64 !== null) {
-            // guardamos la cadena base64
-            $stmt->bindValue(':photo', $photoBase64, PDO::PARAM_STR);
-        } else {
-            $stmt->bindValue(':photo', null, PDO::PARAM_NULL);
-        }
-
-        $stmt->bindValue(':category', $category);
-        $stmt->bindValue(':status', $status);
-
-        $stmt->execute();
-        $newId = (int)$conn->lastInsertId();
-
-        http_response_code(201);
-        echo json_encode([
-            'status' => 'success',
-            'message' => 'Publicación creada correctamente',
-            'post_id' => $newId
-        ]);
-    } catch (PDOException $e) {
-        http_response_code(500);
-        error_log('DB POST error: ' . $e->getMessage());
-        echo json_encode(['status' => 'error', 'message' => 'Error al insertar en la base de datos']);
-    }
+    $table = isset($_GET['table']) && in_array($_GET['table'], $allowedTables) ? $_GET['table'] : 'posts';
+    $what = isset($_POST['what']) ? trim($_POST['what']) : '';
+    $values = isset($_POST['values']) ? trim($_POST['values']) : '';
 }
+
+
 ?>
 

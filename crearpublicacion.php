@@ -1,23 +1,5 @@
 <?php
-include('conexion.php');
 include('bar.php');
-session_start();
-
-if ($_POST); {
-
-  $id=(isset($_POST['id']))?$_POST['id']:"";
-	$name=(isset($_POST['name']))?$_POST['name']:"";
-	$description=(isset($_POST['description']))?$_POST['description']:"";
-	$user_id=(isset($_POST['user_id']))?$_POST['user_id']:"";
-	$FOREIGN=(isset($_POST['FOREIGN']))?$_POST['FOREIGN']:"";
-	$category=(isset($_POST['category']))?$_POST['category']:"";
-	$photo=(isset($_FILES['photo']['name']))?$_FILES['photo']['name']:"";
-	$status=(isset($_POST['status']))?$_POST['status']:"";
-	$created_at=(isset($_POST['created_at']))?$_POST['created_at']:"";
-}
-
-
-
 ?>
 <!doctype html>
 <html>
@@ -30,6 +12,7 @@ if ($_POST); {
 		<link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
 		<link href='https://fonts.googleapis.com/css?family=Expletus Sans' rel='stylesheet'>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <title>Crear publicación</title>
 </head>
 <body>
@@ -40,7 +23,7 @@ if ($_POST); {
       type="text"
       class="form-control"
       name="Titulo"
-      id=""
+      id="Tit"
       aria-describedby="helpId"
       placeholder="Titulo"
     />
@@ -52,7 +35,7 @@ if ($_POST); {
       type="text"
       class="form-control"
       name="Descripción"
-      id=""
+      id="Des"
       aria-describedby="helpId"
       placeholder="Descripción"
     />
@@ -64,14 +47,14 @@ if ($_POST); {
       type="file"
       class="form-control"
       name="Imagen"
-      id="Imagen"
+      id="Img"
       placeholder=""
       aria-describedby="fileHelpId"
     />
   </div>
   
     <label for="" class="form-select">Categoría</label> </br>
-<select class="form-select" aria-label="Default select example">
+<select class="form-select" id="Cate" aria-label="Default select example">
   <option selected>Ninguna</option>
   <option value="1">Vestimenta</option>
   <option value="2">Herramientas</option>
@@ -83,6 +66,19 @@ if ($_POST); {
   <option value="8">Entretenimiento</option>
   <option value="9">Hogar & Muebles</option>
 </select>
+
+</br>
+<input
+  name=""
+  id="But"
+  class="Butooo"
+  type="button"
+  value="Publicar"
+/>
+
+<script src="js/post.js"></script>
+<script src="lib/jquery-3.7.1.min.js.js"></script> 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src=js/bar.js></script>
 </body>
 </html>
