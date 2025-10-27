@@ -15,6 +15,9 @@ switch ($method) {
     case 'GET':
         handleGetRequest();
         break;
+        case 'POST':
+        handlePostRequest();
+        break;
     default:
         http_response_code(405);
         echo json_encode(['status' => 'error', 'message' => 'Method not allowed.']);
@@ -23,19 +26,18 @@ switch ($method) {
 
 function handleGetRequest() {
     global $conn, $allowedTables, $allowedSortColumns, $allowedOrderDirections;
-    //Lo de abajo es un montón de sanitización y cosas de esas. 
+    //Lo de abajo es  //Lo de abajo es un montón de sanitización y cosas de esas. 
     $table = isset($_GET['table']) && in_array($_GET['table'], $allowedTables) ? $_GET['table'] : 'posts';
     $order = isset($_GET['order']) && in_array(strtoupper($_GET['order']), $allowedOrderDirections) ? strtoupper($_GET['order']) : 'DESC';
     $what = isset($_GET['what']) ? $_GET['what'] : '*';
     $whereClause = isset($_GET['where']) ? $_GET['where'] : '1';
     $limit = isset($_GET['limit']) ? $_GET['limit'] : '20';
-    
-  
     $sortColumn = isset($_GET['sort']) && in_array($_GET['sort'], $allowedSortColumns) ? $_GET['sort'] : 'id';
-    
+
     try {
-        $sql = 'SELECT ' . $what . ' FROM `' . $table . '` WHERE ' . $whereClause . ' ORDER BY `' . $sortColumn . '` ' . $order .' LIMIT ' . $limit; 
-        $stmt = $conn->prepare($sql);
+$sql = 'SELECT ' . $what . ' FROM `' . $table . '` WHERE ' . $whereClause . ' ORDER BY `' . $sortColumn . '` ' . $order .' LIMIT ' . $limit;
+    $stmt = $conn->prepare($sql);
+
 	$processedRow = [];
 	$stmt->execute();
 
@@ -75,5 +77,15 @@ function handleGetRequest() {
         ]);
     }
 }
+function handlePostRequest() {
+    global $conn, $allowedTables, $allowedSortColumns, $allowedOrderDirections;
+
+    // Campos mínimos
+    $table = isset($_GET['table']) && in_array($_GET['table'], $allowedTables) ? $_GET['table'] : 'posts';
+    $what = isset($_POST['what']) ? trim($_POST['what']) : '';
+    $values = isset($_POST['values']) ? trim($_POST['values']) : '';
+}
+
+
 ?>
 

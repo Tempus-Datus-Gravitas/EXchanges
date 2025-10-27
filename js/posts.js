@@ -84,7 +84,7 @@ $(window).on("load", function(){
 					$.ajax({
 						url: `${link}/api.php`,
 						method: "GET",
-						data: {where: `id = ${id}`},
+						data: {where: `id = ${id}`, limit: "1"},
 						success: function(response){
 							let posts = response.data;
 							console.log(response.data);
@@ -119,6 +119,36 @@ $(window).on("load", function(){
 				} else {
 				    console.log("Hubo un error al inresar");
 				}			
+		break;
+		case "Crear Publicación":
+			$('#But').on('click', function(){
+				const name = $('#Tit').val();
+				const description = $('#Des').val();
+				const category = $('#Cate').val();
+				const photoFile = $('#Img')[0].files[0];
+
+				// Convertir imagen a base64
+				const reader = new FileReader();
+				reader.onload = function(e) {
+					const base64Image = e.target.result.split(',')[1]; // Obtiene la img en base64 (q vaguez hacer esto)
+
+					$.ajax({
+						url: `${link}/api.php`,
+						type: "POST",
+						data: { 
+							table: "posts", what: "name, description, user_id, photo, category, status", values:  `'${name}', '${description}', 1, '${base64Image}', '${category}', 'available'`
+						},
+						dataType: "json",
+						success: function(response){
+							if (response.status === "success") {
+								alert("Publicación creada exitosamente. Redirigiendo...");
+							} else {
+								alert("Hubo un error al crear la publicación. Por favor, inténtalo de nuevo.");
+							}}
+					});
+				};
+				reader.readAsDataURL(photoFile);
+			});
 		break;
 	}
 });
