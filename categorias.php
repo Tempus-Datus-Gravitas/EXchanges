@@ -12,35 +12,48 @@
 	   <title>Categorías</title>
 	</head>
 	<body>
+		<div class="cargando">
+			<img src="https://i.gifer.com/ZZ5H.gif" alt="Cargando">
+		</div>
 		<?php include 'bar.php'; ?>
 	<div id="container">
 		<div id="sectiontitle"><p>Categorías disponibles</p></div>
 		<div id="categories">
 			<?php
 				include 'conexion.php';
-				$query = "SELECT DISTINCT category FROM posts";
-				$result = mysqli_query($conn, $query);
-				while ($row = mysqli_fetch_assoc($result)) {
-					$categoria = htmlspecialchars($row['category']);
-					echo "<div class='ofertas-categoria'>"
-						."<h2>$categoria</h2>"
-						."<div id='cards'>";
-					$query2 = "SELECT * FROM posts WHERE category='$categoria' ORDER BY id DESC LIMIT 5";
-					$result2 = mysqli_query($conn, $query2);
-					while ($row2 = mysqli_fetch_assoc($result2)) {
-						echo "<div class='card'>"
-							."<div class='image'>"
-							."<img src=data:image/jpeg;base64,".base64_encode($row2['photo'])." alt='Imagen del producto'>"
-							."</div>"
-							."<h2>".$row2['name']."</h2>"
+				try{
+					$sql = 'SELECT DISTINCT category FROM posts';
+					$stmt = $conn->prepare($sql);
+					$stmt->execute();
+					while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+						$category = htmlspecialchars($row['category']);
+						echo "<div class='ofertas-categoria'>"
+							."<h2>$category</h2>"
+							."<div id='cards' class='{$category}'></div>"
 							."</div>";
-					}
-					echo "</div>"
-					."</div>";
-				}
-				mysqli_close($conn);
+					       	
+					} 
+					
+				} catch (PDOException $e) {
+					http_response_code(500);
+					error_log('Database query failed: ' . $e->getMessage());
+					echo json_encode([
+					    'status' => 'error',
+					    'message' => 'Error de server'
+					]);
+					
+				}	
 			?>
+
 		</div>
 	</div>
+	<script src="lib/jquery-3.7.1.min.js.js"></script>
+	<script>
+	var cargando = document.querySelector(".cargando");
+	window.addEventListener('load', function() {
+		cargando.style.display = 'none';
+	})
+	</script>
+	<script src="js/posts.js"></script>
 	</body>
 </html>

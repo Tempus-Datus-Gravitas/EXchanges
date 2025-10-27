@@ -27,8 +27,9 @@ function handleGetRequest() {
     $table = isset($_GET['table']) && in_array($_GET['table'], $allowedTables) ? $_GET['table'] : 'posts';
     $order = isset($_GET['order']) && in_array(strtoupper($_GET['order']), $allowedOrderDirections) ? strtoupper($_GET['order']) : 'DESC';
     $what = isset($_GET['what']) ? $_GET['what'] : '*';
-
-    $whereClause = '1';
+    $whereClause = isset($_GET['where']) ? $_GET['where'] : '1';
+    $limit = isset($_GET['limit']) ? $_GET['limit'] : '20';
+    
     $whereParams = [];
     if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         $whereClause = 'id = :id';
@@ -38,7 +39,7 @@ function handleGetRequest() {
     $sortColumn = isset($_GET['sort']) && in_array($_GET['sort'], $allowedSortColumns) ? $_GET['sort'] : 'id';
     
     try {
-        $sql = 'SELECT ' . $what . ' FROM `' . $table . '` WHERE ' . $whereClause . ' ORDER BY `' . $sortColumn . '` ' . $order;
+        $sql = 'SELECT ' . $what . ' FROM `' . $table . '` WHERE ' . $whereClause . ' ORDER BY `' . $sortColumn . '` ' . $order .' LIMIT ' . $limit; 
         $stmt = $conn->prepare($sql);
         
         foreach ($whereParams as $placeholder => $value) {
