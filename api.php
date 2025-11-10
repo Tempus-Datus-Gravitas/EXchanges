@@ -33,41 +33,69 @@ function handleGetRequest() {
     $whereClause = isset($_GET['where']) ? $_GET['where'] : '1';
     $limit = isset($_GET['limit']) ? $_GET['limit'] : '20';
     $sortColumn = isset($_GET['sort']) && in_array($_GET['sort'], $allowedSortColumns) ? $_GET['sort'] : 'id';
-
+    $type = isset($_GET['type']) ? $_GET['type'] : 'nose';
     try {
-$sql = 'SELECT ' . $what . ' FROM `' . $table . '` WHERE ' . $whereClause . ' ORDER BY `' . $sortColumn . '` ' . $order .' LIMIT ' . $limit;
-    $stmt = $conn->prepare($sql);
+	if ($type === "LOGIN"){
+		$passwordL= isset($_GET['passwd']) ? $_GET['passwd'] : 'asdsad';
+		$sql = 'SELECT '. $what . ' FROM '. $table . ' WHERE '. $whereClause;
+		$stmt = $conn->prepare($sql);
+		$stmt->execute();
+		$user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-	$processedRow = [];
-	$stmt->execute();
+		if ($user && password_verify($passwordL, $user['password'])) {
+			session_regenerate_id(true);
+			session_start();
+			$_SESSION['user_id'] = $user['id'];
+			$_SESSION['user_username'] = $user['username'];
+			$_SESSION['user_email'] = $user['email'];
+			$_SESSION['user_admin'] = $user['admin'];
+			$_SESSION['user_pfp'] = $user['pfp'];
+			$_SESSION['user_verified'] = $user['verified'];
 
-	$json = array();
-	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-		$json[] = array(
-			'id' => $row['id'],
-			'name' => $row['name'],
-			'description' => $row['description'],
-			'user_id' => $row['user_id'],
-			'photo' => base64_encode($row['photo']),
-			'category' =>$row['category'],
-			'status' =>$row['status'],
-			'created_at' =>$row['created_at']	
-		);
-	} 
-		
-	if (!empty($json)) {
-            echo json_encode([
-                'status' => 'success',
-                'data' => $json
-            ]);
-        } else {
-            http_response_code(404);
-            echo json_encode([
-                'status' => 'error',
-                'message' => 'No se encontraron publicaciones'
-            ]);
-        }
+			echo json_encode([
+			    'status' => 'success',
+			    'message' => 'inicio de sesión exitoso.'
+			]);
+		} else {
+			http_response_code(401);
+			echo json_encode([
+			    'status' => 'error',
+			    'message' => 'credenciales incorrectas.'
+			]);
+		}
 
+	}else{	
+		$sql = 'SELECT ' . $what . ' FROM `' . $table . '` WHERE ' . $whereClause . ' ORDER BY `' . $sortColumn . '` ' . $order .' LIMIT ' . $limit;
+		$stmt = $conn->prepare($sql);
+		$stmt->execute();
+
+		$json = array();
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+			$json[] = array(
+				'id' => $row['id'],
+				'name' => $row['name'],
+				'description' => $row['description'],
+				'user_id' => $row['user_id'],
+				'photo' => base64_encode($row['photo']),
+				'category' =>$row['category'],
+				'status' =>$row['status'],
+				'created_at' =>$row['created_at']	
+			);
+		} 
+			
+		if (!empty($json)) {
+		    echo json_encode([
+			'status' => 'success',
+			'data' => $json
+		    ]);
+		} else {
+		    http_response_code(404);
+		    echo json_encode([
+			'status' => 'error',
+			'message' => 'No se encontraron publicaciones'
+		    ]);
+		}
+	}
     } catch (PDOException $e) {
         http_response_code(500);
         error_log('Database query failed: ' . $e->getMessage());
@@ -78,12 +106,72 @@ $sql = 'SELECT ' . $what . ' FROM `' . $table . '` WHERE ' . $whereClause . ' OR
     }
 }
 function handlePostRequest() {
-    global $conn, $allowedTables, $allowedSortColumns, $allowedOrderDirections;
-
+    global $conn, $allowedTables;
     // Campos mínimos
-    $table = isset($_GET['table']) && in_array($_GET['table'], $allowedTables) ? $_GET['table'] : 'posts';
+    $table = isset($_POST['table']) && in_array($_POST['table'], $allowedTables) ? $_POST['table'] : 'posts';
     $what = isset($_POST['what']) ? trim($_POST['what']) : '';
     $values = isset($_POST['values']) ? trim($_POST['values']) : '';
+    $type = isset($_POST['type']) ? trim($_POST['type']): 'else';
+	
+    try{
+	    if ($type == "POSTITEM"){
+		    session_start();
+		    $name = $_POST['name'];
+		    $description = $_POST['description'];
+		    $category = $_POST['category'];
+		    $base64image = $_POST['photo'];
+		    $user_id = $_SESSION['user_id'];
+		    $rawbase64 = trim($base64image, " '");
+		    $sql = 'INSERT INTO '. $table . ' ('.$what.') VALUES (?,?,?,?,?)';
+
+		    $binaryImage = base64_decode($rawbase64);
+		    $stmt = $conn->prepare($sql);
+		    $stmt->bindParam(1, $name, PDO::PARAM_STR);
+		    $stmt->bindParam(2, $description, PDO::PARAM_STR);
+		    $stmt->bindParam(3, $binaryImage, PDO::PARAM_LOB);
+		    $stmt->bindParam(4, $category, PDO::PARAM_STR);
+		    $stmt->bindParam(5, $user_id, PDO::PARAM_INT);
+		    $stmt->execute();
+		    echo json_encode(['status' => 'success']);
+		    return;
+
+	    }else if ($type == "CREATEUSER"){
+		    $name = isset($_POST['name']) ? $_POST['name'] : '';
+		    $username = isset($_POST['username']) ?$_POST['username'] : '';
+		    $email = isset($_POST['email']) ? $_POST['email'] : '';
+		    $password = isset($_POST['password']) ? $_POST['password'] : '';
+		    $pfp = isset($_POST['pfp']) ? $_POST['pfp'] : '';
+		    $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
+		    $binarypfp = base64_decode($pfp);
+		    $pfp_length = strlen($binarypfp);
+
+		    $sql = 'INSERT INTO '. $table . ' (' . $what . ') VALUES ( ?, ?, ?, ?, ?)';
+		    $stmt = $conn->prepare($sql);
+		    $stmt->bindParam(1, $name, PDO::PARAM_STR);
+		    $stmt->bindParam(2, $username, PDO::PARAM_STR);
+		    $stmt->bindParam(3, $email, PDO::PARAM_STR);
+		    $stmt->bindParam(4, $hashedpassword, PDO::PARAM_STR);
+		    $stmt->bindParam(5, $binarypfp, PDO::PARAM_LOB, $pfp_length);
+		    $stmt->execute();
+		    echo json_encode(['status' => 'success']);
+		    return;
+	    }else{
+		    $sql = 'INSERT INTO '. $table . ' (' . $what . ') VALUES ('. $values .')';
+		    $stmt = $conn->prepare($sql);
+		    $stmt->execute();
+		    echo json_encode(['status' => 'success']);
+		    return;
+
+	    }
+	} catch (PDOException $e) {
+		http_response_code(500);
+		error_log('Database query failed: ' . $e->getMessage());
+		echo json_encode([
+		    'status' => 'error',
+		    'message' => 'Error de server'
+		]);
+    }
+
 }
 
 

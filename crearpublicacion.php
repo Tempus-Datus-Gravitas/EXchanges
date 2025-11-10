@@ -70,16 +70,10 @@ include('bar.php');
 
 </br>
 <input
-  name=""
-  id="But"
-  class="btn btn-primary"
-  type="button"
-  value="Publicar"
-/>
+  name="" id="But" class="btn btn-primary" type="button" value="Publicar"/>
 
-<script src="js/post.js"></script>
+<script src="js/posts.js"></script>
 <script src="lib/jquery-3.7.1.min.js.js"></script> 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<script src=js/bar.js></script>
 </body>
 </html>

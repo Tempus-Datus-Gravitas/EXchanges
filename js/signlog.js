@@ -1,5 +1,6 @@
 let page = document.querySelector('title').textContent; // define la página actual
 actualpage(page); // Llama a la función actualpage con el nombre de la página actual.
+let link = "http://localhost/EXchanges";
 
 function actualpage(page) {
 	if (page == "Inicio de sesión") {
@@ -35,25 +36,8 @@ login.addEventListener('click', function(event) {
     if (email.value === "" || password.value === "") {
         alert("Por favor, completa todos los campos.");
     } else {
-        $.ajax({
-            url: "loginbackend.php",
-            method: "POST", // <--- THIS IS THE CRITICAL CHANGE
-            data: { email: email.value, password: password.value },
-            dataType: "json",
-            success: function(response) {
-                if (response.status === "success") {
-                    alert("Inicio de sesión exitoso. Redirigiendo...");
-                    window.location.href = "index.php";
-                } else {
-                    alert("Correo o contraseña incorrectos. Por favor, inténtalo de nuevo.");
-                }
-            },
-            error: function(xhr, status, error) {
-                alert("Error en la conexión. Por favor, inténtalo de nuevo más tarde.");
-                console.error("AJAX Error:", status, error); // Log for debugging
-            }
-        });
-    }
+	    loginajax(email, password);
+     }
 });
 }
 
@@ -125,26 +109,30 @@ function registro() {
 			alert("Las contraseñas no coinciden. Por favor, inténtalo de nuevo.");
 			event.preventDefault();
 		}else {
+		getDefaultPfpBase64('img/userpfp.jpg')
+		    .then(pfpData => {
+			let pfp = pfpData;
+			
 			$.ajax({
-				url: "registerbackend.php",
-				type: "POST",
-				data: { name: nombreapellido.value, username: username.value, email: email.value, password: password.value },
-				dataType: "json",
-				success: function(response) {
-					if (response.status === "success") {
-						$.ajax({
-							url: "loginbackend.php",
-							data: { email: email.value, password: password.value },
-						});
-						alert("Registro exitoso. Redirigiendo al inicio");
-						window.location.href = "index.php";
-					} else {
-						alert("Error en el registro: " + response.message);
-						location.reload();
-					}
-				},
+			    url: "api.php",
+			    type: "POST",
+			    data: { 
+				type: "CREATEUSER",
+				table: 'users',
+				what: 'name, username, email, password, pfp',
+				name: nombreapellido.value,
+				username: username.value,
+				email: email.value,
+				password: password.value,
+				pfp: pfp 
+			    },
+			    dataType: "json",
+			    success: function(response) {
+				loginajax(email, password);
+			    },
 			});
-		}
+		    })
+    		}
 	});
 
 }
@@ -160,3 +148,61 @@ function calculateAge(birthDate) {
 	return age;
 }
 
+function loginajax(email, password) {
+    $.ajax({
+        url: `${link}/api.php`,
+        method: "GET",
+        data: { 
+            type: 'LOGIN', 
+            table: 'users', 
+            where: `email='${email.value}'`,
+	    passwd: password.value
+        },
+        dataType: "json",
+        success: function(response) {
+            if (response.status === "success") {
+                alert("Inicio de sesión exitoso. Redirigiendo...");
+                window.location.href = "index.php";
+            } else {
+                alert("Correo o contraseña incorrectos. Por favor, inténtalo de nuevo.");
+            }
+        }
+    });
+}
+
+async function getDefaultPfpBase64(url) {
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error('Fallo al cargar foto de perfil defecto: ' + response.status);
+    }
+    const blob = await response.blob();
+    
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            const rawBase64 = reader.result.split(',')[1];
+            resolve(rawBase64);
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(blob);
+    });
+}
+
+
+async function getDefaultPfpBase64(url) {
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error('Fallo al cargar foto de perfil defecto: ' + response.status);
+    }
+    const blob = await response.blob(); 
+    
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            const rawBase64 = reader.result.split(',')[1];
+            resolve(rawBase64);
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(blob);
+    });
+}

@@ -72,40 +72,6 @@
 		</div>
 		<script src="lib/jquery-3.7.1.min.js.js"></script>
 		<script src="js/signlog.js"></script>
-		<?php
-			if (ISSET($_POST['name']) && ISSET($_POST['age']) && ISSET($_POST['username']) && ISSET($_POST['email']) && ISSET($_POST['password']) && ISSET($_POST['password2'])) {
-				//El codigo evita inyecciones SQL y verifica si el usuario existe en la base de datos, lo segundo es obvio.
-				require_once 'conexion.php';
-				$stmt = $conn->prepare("SELECT * FROM users WHERE email = ? OR username = ?");
-				$email = $_POST['email'];
-				$username = $_POST['username'];
-				$stmt->bind_param("ss", $email, $username); 
-				$stmt->execute(); 
-				$result = $stmt->get_result();
-				if ($result->num_rows > 0) {
-					echo "<script>alert('El correo o nombre de usuario ya están en uso');</script>";
 
-				}else {
-					$stmt = $conn->prepare("INSERT INTO users (username, name, email, password, verified, admin) VALUES (?, ?, ?, ?, 0, 0)");
-					$name = $_POST['name'];
-					$age = $_POST['age'];
-					$password = $_POST['password'];
-					$email = $_POST['email'];
-					$username = $_POST['username'];
-					$stmt->bind_param("ssss", $username, $name, $email, $password);
-					if ($stmt->execute()) {
-						echo "<script>alert('Registro exitoso');</script>";
-						session_start();
-						$_SESSION['user_id'] = $conn->insert_id;
-						$_SESSION['user_username'] = $username;
-						$_SESSION['user_email'] = $email;
-						$_SESSION['user_admin'] = 0;
-						$_SESSION['user_verified'] = 0;
-						session_regenerate_id(true);
-						echo "<script>window.location.href = 'index.php';</script>";	
-					}
-				}
-			}
-		?>
 	</body>
 </html>

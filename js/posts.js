@@ -103,11 +103,10 @@ $(window).on("load", function(){
 										<p class="descripcion">${post.description}</p>
 									      </div>
 									      <div class="publicador" style="width:10rem height:5rem">
-									      		<p>${post.user_id}</p>
 									      </div>
 									      <div class="botones"post.description>
-										<button class="comprar">EXchange</button>
-										<button class="carrito">Mensaje</button>
+										<button class="Exc">EXchange</button>
+										<button class="msg">Mensaje</button>
 									      </div>
 									    </div>
 								`);
@@ -120,7 +119,7 @@ $(window).on("load", function(){
 				    console.log("Hubo un error al inresar");
 				}			
 		break;
-		case "Crear Publicación":
+		case "Crear publicación":
 			$('#But').on('click', function(){
 				const name = $('#Tit').val();
 				const description = $('#Des').val();
@@ -130,14 +129,19 @@ $(window).on("load", function(){
 				// Convertir imagen a base64
 				const reader = new FileReader();
 				reader.onload = function(e) {
-					const base64Image = e.target.result.split(',')[1]; // Obtiene la img en base64 (q vaguez hacer esto)
+					const base64Image = e.target.result.split(',')[1];
 
 					$.ajax({
 						url: `${link}/api.php`,
 						type: "POST",
-						data: { 
-							table: "posts", what: "name, description, user_id, photo, category, status", values:  `'${name}', '${description}', 1, '${base64Image}', '${category}', 'available'`
-						},
+						data: { type: "POSTITEM",
+							table: "posts", 
+							what: "name, description, photo, category, user_id", 
+							name: name,
+							description: description,
+							photo: base64Image,
+							category: category
+						},					
 						dataType: "json",
 						success: function(response){
 							if (response.status === "success") {
@@ -147,7 +151,11 @@ $(window).on("load", function(){
 							}}
 					});
 				};
-				reader.readAsDataURL(photoFile);
+				if (photoFile) {
+					reader.readAsDataURL(photoFile); 
+				} else {
+					alert("Please select a photo.");
+				}
 			});
 		break;
 	}

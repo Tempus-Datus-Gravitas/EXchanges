@@ -16,8 +16,18 @@
 <?php
 	include ('bar.php');
 ?>
+		<div class="cargando">
+			<img src="https://i.gifer.com/ZZ5H.gif" alt="Cargando">
+		</div>
   <div class="contenedor-producto">
   </div>
+ <script src="lib/jquery-3.7.1.min.js.js"></script>
+		<script>
+		var cargando = document.querySelector(".cargando");
+		window.addEventListener('load', function() {
+			cargando.style.display = 'none';
+		})
+		</script>
 
   <script src="js/publicacion.js"></script>
   <script src="js/posts.js"></script>
