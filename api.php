@@ -1,9 +1,8 @@
 <?php
 require_once 'conexion.php';
-
 // Las siguientes variables son para poder enviar desde JS valores que se usen para las peticiones y así utilizar la api sin miedo de inyecciones
-$allowedTables = ['posts', 'users', 'photos'];
-$allowedSortColumns = ['id', 'created_at', 'name'];
+$allowedTables = ['posts', 'users', 'photos', 'messages','chats'];
+$allowedSortColumns = ['id', 'created_at', 'name', 'timestamp'];
 $allowedOrderDirections = ['ASC', 'DESC'];
 
 header("Content-Type: application/json; charset=UTF-8");
@@ -35,7 +34,7 @@ function handleGetRequest() {
     $sortColumn = isset($_GET['sort']) && in_array($_GET['sort'], $allowedSortColumns) ? $_GET['sort'] : 'id';
     $type = isset($_GET['type']) ? $_GET['type'] : 'nose';
     try {
-	if ($type === "LOGIN"){
+	if ($table === "users"){
 		$passwordL= isset($_GET['passwd']) ? $_GET['passwd'] : 'asdsad';
 		$sql = 'SELECT '. $what . ' FROM '. $table . ' WHERE '. $whereClause;
 		$stmt = $conn->prepare($sql);
@@ -60,11 +59,11 @@ function handleGetRequest() {
 			http_response_code(401);
 			echo json_encode([
 			    'status' => 'error',
-			    'message' => 'credenciales incorrectas.'
+			    'message' => 'Credenciales incorrectas.'
 			]);
 		}
 
-	}else{	
+	}else if ($table == 'posts'){	
 		$sql = 'SELECT ' . $what . ' FROM `' . $table . '` WHERE ' . $whereClause . ' ORDER BY `' . $sortColumn . '` ' . $order .' LIMIT ' . $limit;
 		$stmt = $conn->prepare($sql);
 		$stmt->execute();
@@ -88,14 +87,66 @@ function handleGetRequest() {
 			'status' => 'success',
 			'data' => $json
 		    ]);
-		} else {
+		}else {
 		    http_response_code(404);
 		    echo json_encode([
 			'status' => 'error',
 			'message' => 'No se encontraron publicaciones'
 		    ]);
 		}
+	}else if($table == "messages"){
+		$sql = 'SELECT ' . $what . ' FROM `' . $table . '` WHERE ' . $whereClause . ' ORDER BY `' . $sortColumn . '` ' . $order .' LIMIT ' . $limit;
+		$stmt = $conn->prepare($sql);
+		$stmt->execute();
+
+		$json = array();
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+			$json[] = array(
+				'id_message' => $row['id_message'],
+				'chat_id' => $row['chat_id'],
+				'sender_id' => $row['sender_id'],
+				'message' => $row['message'],
+				'timestamp' => $row['timestamp']
+			);
+		} 
+			
+		if (!empty($json)) {
+		    echo json_encode([
+			'status' => 'success',
+			'data' => $json
+		    ]);
+		}else {
+		    echo json_encode([
+			'status' => 'error',
+			'message' => 'Comienza un chat con este usuario'
+		    ]);
+		}
+
+	}else if ($table == "chats"){
+		global $conn, $allowedTables;
+		session_start();
+		$current_user_id = $_SESSION['user_id']; 
+		$json = array();
+		$sql = 'SELECT * FROM chats WHERE user1_id = ? OR user2_id = ?';
+                $stmt = $conn->prepare($sql);
+		$stmt->execute([$current_user_id, $current_user_id]);
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                            $other_user_id = ($row['user1_id'] == $current_user_id) ? $row['user2_id'] : $row['user1_id'];
+                            $sql2 = 'SELECT id, username, pfp FROM users WHERE id = ?';
+                            $stmt2 = $conn->prepare($sql2);
+                            $stmt2->execute([$other_user_id]);  
+				    while ($row2 = $stmt2->fetch(PDO::FETCH_ASSOC)){
+					    $json[] = array(
+					    	'chat_id' => $row['id_chat'],
+						'pfp' => base64_encode($row2['pfp']),
+						'username' => $row2['username']
+					    );
+				    }
+		}
+		http_response_code(200); 
+        	echo json_encode(['status' => 'success', 'data' => $json]);
 	}
+	
     } catch (PDOException $e) {
         http_response_code(500);
         error_log('Database query failed: ' . $e->getMessage());
@@ -114,7 +165,7 @@ function handlePostRequest() {
     $type = isset($_POST['type']) ? trim($_POST['type']): 'else';
 	
     try{
-	    if ($type == "POSTITEM"){
+	    if ($table == "posts"){
 		    session_start();
 		    $name = $_POST['name'];
 		    $description = $_POST['description'];
@@ -135,7 +186,7 @@ function handlePostRequest() {
 		    echo json_encode(['status' => 'success']);
 		    return;
 
-	    }else if ($type == "CREATEUSER"){
+	    }else if ($table == "users"){
 		    $name = isset($_POST['name']) ? $_POST['name'] : '';
 		    $username = isset($_POST['username']) ?$_POST['username'] : '';
 		    $email = isset($_POST['email']) ? $_POST['email'] : '';
@@ -155,17 +206,54 @@ function handlePostRequest() {
 		    $stmt->execute();
 		    echo json_encode(['status' => 'success']);
 		    return;
-	    }else{
-		    $sql = 'INSERT INTO '. $table . ' (' . $what . ') VALUES ('. $values .')';
+
+	    }else if($table == "messages"){
+		    session_start();
+		    $sender = $_SESSION['user_id'];
+    		    $chat_id = $_POST['chat_id'];
+		    $message = $_POST['message']; 
+		    
+		    $sql = 'INSERT INTO '. $table . ' (' . $what .') VALUES (?,?,?)';
 		    $stmt = $conn->prepare($sql);
+		    $stmt->bindParam(1, $message, PDO::PARAM_STR);
+		    $stmt->bindParam(2, $chat_id, PDO::PARAM_INT);
+		    $stmt->bindParam(3, $sender, PDO::PARAM_INT);
 		    $stmt->execute();
-		    echo json_encode(['status' => 'success']);
+		    echo json_encode(['status'=>'success']);
 		    return;
 
+	    }else if ($table == "chats"){
+	    	session_start();
+		$user1_id = $_SESSION['user_id'];
+		$user2_id = $_POST['otheruser'];
+
+		$sql = 'SELECT * FROM ' . $table . ' WHERE (user1_id= ? AND user2_id= ?) OR (user2_id= ? AND user1_id= ?)';
+		$stmt = $conn->prepare($sql);
+		$stmt->bindParam(1, $user1_id, PDO::PARAM_INT);
+    		$stmt->bindParam(2, $user2_id, PDO::PARAM_INT);
+    		$stmt->bindParam(3, $user2_id, PDO::PARAM_INT);
+		$stmt->bindParam(4, $user1_id, PDO::PARAM_INT);
+		$stmt->execute();
+		if ($stmt->rowCount() > 0){
+			echo json_encode(['status' => 'success', 'message' => 'exists']);
+			
+		}else{
+			if ($user2_id == $user2_id){
+				echo json_encode(['status' => 'success', 'message' => 'Ese es tu propia publicación']);
+				return;
+			}
+			$sql2 = 'INSERT INTO '. $table . ' (user1_id,user2_id) VALUES (?,?)';
+				$stmt2= $conn->prepare($sql2);
+				$stmt2->bindParam(1, $user1_id, PDO::PARAM_INT);
+				$stmt2->bindParam(2, $user2_id, PDO::PARAM_INT);
+				$stmt2->execute();
+				echo json_encode(['status' => 'success', 'message' => 'Fly me to the moon']);
+		}
+		return;
 	    }
-	} catch (PDOException $e) {
+	}catch (PDOException $e) {
 		http_response_code(500);
-		error_log('Database query failed: ' . $e->getMessage());
+		error_log('Query Falló: ' . $e->getMessage());
 		echo json_encode([
 		    'status' => 'error',
 		    'message' => 'Error de server'

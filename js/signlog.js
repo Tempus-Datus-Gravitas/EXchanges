@@ -19,7 +19,7 @@ let password = document.querySelector('#password');
 let inputspace = $('.inputspace > input');
 
 $(inputspace).each(function(index) {
-    $(this).on('keyup', function(event) {
+  $(this).on('keyup', function(event) {
         if (event.key === 'Enter') {
             if (index < inputspace.length - 1) {
                 inputspace[index + 1].focus();
@@ -96,7 +96,7 @@ function registro() {
 		part1.style.display = "none";
 		part2.style.display = "block";
 		idea.textContent = 'Correo y contraseña';
-		parts.textContent = '2 de 2';
+	parts.textContent = '2 de 2';
 		progressbar.style.background = "linear-gradient(to right, #414141 100%, #D9D9D9 0%)";	
 	}
 
@@ -117,7 +117,6 @@ function registro() {
 			    url: "api.php",
 			    type: "POST",
 			    data: { 
-				type: "CREATEUSER",
 				table: 'users',
 				what: 'name, username, email, password, pfp',
 				name: nombreapellido.value,
@@ -153,7 +152,6 @@ function loginajax(email, password) {
         url: `${link}/api.php`,
         method: "GET",
         data: { 
-            type: 'LOGIN', 
             table: 'users', 
             where: `email='${email.value}'`,
 	    passwd: password.value
@@ -166,7 +164,9 @@ function loginajax(email, password) {
             } else {
                 alert("Correo o contraseña incorrectos. Por favor, inténtalo de nuevo.");
             }
-        }
+        },error: function(response){
+                alert("Correo o contraseña incorrectos. Por favor, inténtalo de nuevo.");
+	}
     });
 }
 

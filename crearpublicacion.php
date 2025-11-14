@@ -8,6 +8,7 @@ include('bar.php');
 		<link rel="icon" href="img/logo.png">
 		<link rel="stylesheet" href="css/inicio.css">
 		<link rel="stylesheet" href="css/bar.css">
+		<link rel="stylesheet" href="css/cpublicacion.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 		<link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
 		<link href='https://fonts.googleapis.com/css?family=Expletus Sans' rel='stylesheet'>
@@ -17,6 +18,7 @@ include('bar.php');
 </head>
 <body>
 </br></br></br>
+<div id="containers">
   <h1>Crear publicación</h1>
   <div class="titu">
     <label for="" class="form-label">Titulo</label> </br>
@@ -53,8 +55,9 @@ include('bar.php');
       aria-describedby="fileHelpId"
     />
   </div>
-  
-    <label>Categoría</label> </br>
+
+<div class="catego">
+    <label for="" class="form-label">Categoría</label> </br>
 <select class="form-select" id="Cate" aria-label="Default select example">
   <option selected>Ninguna</option>
   <option value="1">Vestimenta</option>
@@ -67,11 +70,11 @@ include('bar.php');
   <option value="8">Entretenimiento</option>
   <option value="9">Hogar & Muebles</option>
 </select>
-
+</div>
 </br>
 <input
   name="" id="But" class="btn btn-primary" type="button" value="Publicar"/>
-
+</div>
 <script src="js/posts.js"></script>
 <script src="lib/jquery-3.7.1.min.js.js"></script> 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

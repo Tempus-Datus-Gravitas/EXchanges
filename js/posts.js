@@ -110,6 +110,24 @@ $(window).on("load", function(){
 									      </div>
 									    </div>
 								`);
+								$('.botones').on('click','.msg',function(){
+									$.ajax({
+										url: `${link}/api.php`,
+										type: `POST`,
+										data:{
+										table: 'chats',
+										otheruser: `${post.user_id}`},
+										dataType:'json',
+										success: function(response){
+											if (response.message == "Esa es tu propia publicación"){
+												alert(`${response.message}`);
+											}else{	
+												window.location.href = `${link}/chats.php?sc=${post.user_id}`;
+											}
+										}
+									});
+									
+								});
 
 							});
 						}
@@ -134,7 +152,7 @@ $(window).on("load", function(){
 					$.ajax({
 						url: `${link}/api.php`,
 						type: "POST",
-						data: { type: "POSTITEM",
+						data: { 
 							table: "posts", 
 							what: "name, description, photo, category, user_id", 
 							name: name,
@@ -146,6 +164,7 @@ $(window).on("load", function(){
 						success: function(response){
 							if (response.status === "success") {
 								alert("Publicación creada exitosamente. Redirigiendo...");
+								window.location.href = `${link}/index.php`
 							} else {
 								alert("Hubo un error al crear la publicación. Por favor, inténtalo de nuevo.");
 							}}
@@ -154,11 +173,15 @@ $(window).on("load", function(){
 				if (photoFile) {
 					reader.readAsDataURL(photoFile); 
 				} else {
-					alert("Please select a photo.");
+					alert("Porfavor eliga una foto.");
 				}
 			});
 		break;
 	}
+});
+
+$(document).on('click','.EXc',function(){
+	// Inicia una oferta
 });
 
 
