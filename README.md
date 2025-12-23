@@ -27,12 +27,6 @@
 
 ---
 
-## 📥 Para ingresar
-
-  Ingresa al sitio web a través del siguiente enlace: [tempus-datus-gravitas.github.io/EXchanges/index.html](https://tempus-datus-gravitas.github.io/EXchanges/index.html)
-
----
-
 ## ⚠️ Descarga de responsabilidad
 
 Este repositorio es solo para **motivos educativos y personales**. No estamos afiliados a nadie. Siempre respeta las licencias de software y apoya a los desarrolladores comprando copias oficiales. Usa bajo tu propia responsabilidad.
